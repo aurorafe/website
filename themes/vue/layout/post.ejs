@@ -3,16 +3,18 @@
         <%- partial('partials/main_menu', { context: 'nav' }) %>
     </ul>
     <div class="list">
-        <h2>
+   <!--     <h2>
             Recent Posts
             <a href="/atom.xml" target="_blank" style="vertical-align: middle; margin-left: 5px">
                 <img src="/images/feed.png" style="width:15px;height:15px">
             </a>
-        </h2>
+        </h2>-->
         <ul style="padding:0">
-        <% site.posts.sort('date', -1).limit(10).each(function (post) { %>
+        <% site.posts.sort('date', -1).limit().each(function (post) { %>
             <li>
-                <a href="/<%- post.path %>" class="sidebar-link<%- page.title === post.title ? ' current' : '' %>"><%- post.title %></a>
+                <% if (post.type === page.type) { %>
+                    <a href="/<%- post.path %>" class="sidebar-link<%- page.title === post.title ? ' current' : '' %>"><%- post.title %></a>
+                <% } %>
             </li>
         <% }) %>
         </ul>
