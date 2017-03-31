@@ -23,62 +23,42 @@ order: 4
  - **用法：**
 ```html
   <button onclick="addPoint()">添加点</button>
-  <button onclick="addPoints()">添加多点</button>
-  <button onclick="removePointById()">通过ID移除标绘点</button>
-  <button onclick="removePointByLayerName()">通过LayerName移除标绘点</button>
   <div id="addPoint"></div>
 ```
 ```js
-var points = [
-  {
-    attributes: {
-      ID: '01',
-      QLDM: 'Y236360922L0050',
-      QLMC: '柏木桥',
-      LXBM: 'Y236360922',
-      LXMC: '赤兴至排江',
-      QLZXZH: '7.4650000000',
-      PYZH: '0.0000000000',
-      QLQC: '23.0000000000',
-      QMQK: '3.5000000000',
-      ASYNXFLDM: '1.0000000000',
-      XZQHBM: '360922'
+var point = {
+  attributes: {
+     ID: '01',
+     QLDM: 'Y236360922L0050',
+     QLMC: '柏木桥',
+     LXBM: 'Y236360922',
+     LXMC: '赤兴至排江',
+     QLZXZH: '7.4650000000',
+     PYZH: '0.0000000000',
+     QLQC: '23.0000000000',
+     QMQK: '3.5000000000',
+     ASYNXFLDM: '1.0000000000',
+     XZQHBM: '360922'
     },
     geometry: 'POINT (115.92466595234826 27.428038204473552)',
     geometryType: 'Point'
-  },
-  {
-    attributes: {
-      ID: '02',
-      QLDM: 'Y236360922L0050',
-      QLMC: '柏木桥02',
-      LXBM: 'Y236360922',
-      LXMC: '赤兴至排江',
-      QLZXZH: '7.4650000000',
-      PYZH: '0.0000000000',
-      QLQC: '23.0000000000',
-      QMQK: '3.5000000000',
-      ASYNXFLDM: '1.0000000000',
-      XZQHBM: '360922'
-    },
-    geometry: 'POINT (115.90466595234826 27.408038204473552)',
-    geometryType: 'Point'
-  }
-]
+}
 function addPoint () {
-  Maps.addPoint(points[0], {
+  Maps.addPoint(point, {
     layerName: 'test'
   });
-}
-function addPoints () {
-  Maps.addPoints(points, {
-    layerName: 'test'
-  });
-}
-function removePointById () {
-  Maps.removeFeatureById('01')
-}
-function removePointByLayerName () {
-  Maps.removeFeatureByLayerName('test')
 }
 ```
+
+### 添加多点
+  ##### addPoints(points,options)
+     
+ - **参数：**
+  
+     - `{Array} points` 标准空间要素数组
+     - `{Object} options` 相关参数
+        
+ - **用法：**
+
+
+
