@@ -575,7 +575,7 @@ var Style = function () {
      * @returns {ol.style.Style}
      */
     value: function getStyleByPoint(attr) {
-      var options = attr['style'] || {};
+      var options = attr['style'] || undefined;
       var style = null;
       if (!options) {
         style = new _constants.ol.style.Style({
@@ -589,6 +589,7 @@ var Style = function () {
         });
       } else {
         style = new _constants.ol.style.Style({});
+        debugger;
         if (options['stroke'] && this._getStroke(options['stroke'])) {
           style.setStroke(this._getStroke(options['stroke']));
         }
@@ -614,7 +615,7 @@ var Style = function () {
   }, {
     key: 'getStyleByLine',
     value: function getStyleByLine(attr) {
-      var options = attr['style'] || {};
+      var options = attr['style'] || undefined;
       var style = null;
       if (!options) {
         style = new _constants.ol.style.Style({
@@ -647,7 +648,7 @@ var Style = function () {
   }, {
     key: 'getStyleByPolygon',
     value: function getStyleByPolygon(attr) {
-      var options = attr['style'] || {};
+      var options = attr['style'] || undefined;
       var style = null;
       if (!options) {
         style = new _constants.ol.style.Style({
@@ -3042,6 +3043,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import Overlay from '../overlay/Overlay'
+
 var shapeType = {
   views: Symbol.for('views')
 };
@@ -3122,8 +3125,8 @@ var Map = function (_mix) {
        */
       this.map = new _constants.ol.Map({
         target: mapDiv,
-        loadTilesWhileAnimating: true,
-        loadTilesWhileInteracting: true,
+        loadTilesWhileAnimating: false,
+        loadTilesWhileInteracting: false,
         logo: this._addCopyRight(options['logo']),
         layers: this.addBaseLayers(options['baseLayers'], options['view']),
         view: this._addView(options['view']),
@@ -3788,13 +3791,310 @@ module.exports = exports['default'];
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _constants = __webpack_require__(2);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Ol3Echarts = function Ol3Echarts() {
-  _classCallCheck(this, Ol3Echarts);
+var olMapCoordSys = function () {
+  function olMapCoordSys(olMap, api) {
+    _classCallCheck(this, olMapCoordSys);
 
-  this.test = 'EX';
-};
+    this._olMap = olMap;
+    this.dimensions = ['lng', 'lat'];
+    this._mapOffset = [0, 0];
+    this._api = api;
+    this.dimensions = ['lng', 'lat'];
+  }
+
+  /**
+   * 设置地图偏移
+   * @param mapOffset
+   */
+
+
+  _createClass(olMapCoordSys, [{
+    key: 'setMapOffset',
+    value: function setMapOffset(mapOffset) {
+      this._mapOffset = mapOffset;
+    }
+  }, {
+    key: 'getBMap',
+    value: function getBMap() {
+      return this._olMap;
+    }
+
+    /**
+     * 坐标转像素
+     * @param coords
+     * @returns {ol.Pixel|*}
+     */
+
+  }, {
+    key: 'dataToPoint',
+    value: function dataToPoint(coords) {
+      return this._olMap.getPixelFromCoordinate(_constants.ol.proj.fromLonLat(coords));
+    }
+
+    /**
+     * 像素转坐标
+     * @param pixel
+     * @returns {ol.Coordinate|*}
+     */
+
+  }, {
+    key: 'pointToData',
+    value: function pointToData(pixel) {
+      return this._olMap.getCoordinateFromPixel(pixel);
+    }
+
+    /**
+     * 获取视图范围
+     * @returns {BoundingRect}
+     */
+
+  }, {
+    key: 'getViewRect',
+    value: function getViewRect() {
+      var api = this._api;
+      return new echarts.graphic.BoundingRect(0, 0, api.getWidth(), api.getHeight());
+    }
+
+    /**
+     * 转换roam
+     */
+
+  }, {
+    key: 'getRoamTransform',
+    value: function getRoamTransform() {
+      return echarts.matrix.create();
+    }
+  }], [{
+    key: 'create',
+    value: function create(ecModel, api) {
+      var coordSys = void 0;
+      ecModel.eachComponent('olMap', function (olMapModel) {
+        var viewportRoot = api.getZr().painter.getViewportRoot();
+        var olMap = echarts.olMap;
+        coordSys = new olMapCoordSys(olMap, api);
+        coordSys.setMapOffset(olMapModel.__mapOffset || [0, 0]);
+        olMapModel.coordinateSystem = coordSys;
+      });
+
+      ecModel.eachSeries(function (seriesModel) {
+        if (seriesModel.get('coordinateSystem') === 'olMap') {
+          seriesModel.coordinateSystem = coordSys;
+        }
+      });
+    }
+  }]);
+
+  return olMapCoordSys;
+}();
+
+var Ol3Echarts = function () {
+  function Ol3Echarts(map, echarts) {
+    _classCallCheck(this, Ol3Echarts);
+
+    if (!echarts) {
+      throw new Error('请先引入echarts3！');
+    }
+    if (!map || !(map instanceof _constants.ol.Map)) {
+      throw new Error('必须传入地图对象！');
+    }
+    this._map = map;
+    this._echarts = echarts;
+    var size = this._map.getSize();
+    var div = this._echartsContainer = document.createElement('div');
+    div.style.position = 'absolute';
+    div.style.height = size[1] + 'px';
+    div.style.width = size[0] + 'px';
+    div.style.top = 0;
+    div.style.left = 0;
+    this._map.getViewport().appendChild(div);
+    this.chart = echarts.init(this._echartsContainer);
+    echarts.olMap = map;
+    this.addResizeListener();
+    this.registerComponentView();
+    this.registerModule();
+    this.registerCoordinateSystem();
+    this._registerAction();
+  }
+
+  /**
+   * 注册坐标系统
+   */
+
+
+  _createClass(Ol3Echarts, [{
+    key: 'registerCoordinateSystem',
+    value: function registerCoordinateSystem() {
+      this._echarts.registerCoordinateSystem('olMap', olMapCoordSys);
+    }
+
+    /**
+     * 注册自定义模块
+     * @returns {*}
+     */
+
+  }, {
+    key: 'registerModule',
+    value: function registerModule() {
+      return this._echarts.extendComponentModel({
+        type: 'olMap',
+        getBMap: function getBMap() {
+          // __bmap is injected when creating BMapCoordSys
+          return this.__olMap;
+        },
+        defaultOption: {
+          roam: false
+        }
+      });
+    }
+
+    /**
+     * 注册事件
+     * @returns {*}
+     * @private
+     */
+
+  }, {
+    key: '_registerAction',
+    value: function _registerAction() {
+      return this._echarts.registerAction({
+        type: 'olMapRoam',
+        event: 'olMapRoam',
+        update: 'updateLayout'
+      }, function (payload, ecModel) {});
+    }
+
+    /**
+     * 注册组件视图
+     * @returns {*}
+     */
+
+  }, {
+    key: 'registerComponentView',
+    value: function registerComponentView() {
+      var that = this;
+      return this._echarts.extendComponentView({
+        type: 'olMap',
+        render: function render(olMapModel, ecModel, api) {
+          var rendering = true;
+          var olMap = that._echarts.olMap;
+          var viewportRoot = api.getZr().painter.getViewportRoot();
+          var coordSys = olMapModel.coordinateSystem;
+          var moveHandler = function moveHandler(type, target) {
+            if (rendering) {
+              return;
+            }
+            var offsetEl = viewportRoot.parentNode.parentNode.parentNode;
+            var mapOffset = [-parseInt(offsetEl.style.left, 10) || 0, -parseInt(offsetEl.style.top, 10) || 0];
+            viewportRoot.style.left = mapOffset[0] + 'px';
+            viewportRoot.style.top = mapOffset[1] + 'px';
+            coordSys.setMapOffset(mapOffset);
+            olMapModel.__mapOffset = mapOffset;
+            api.dispatchAction({
+              type: 'olMapRoam'
+            });
+          };
+          function zoomEndHandler() {
+            if (rendering) {
+              return;
+            }
+            api.dispatchAction({
+              type: 'olMapRoam'
+            });
+          }
+
+          // olMap.off('move', this._oldMoveHandler)
+          // // FIXME
+          // // Moveend may be triggered by centerAndZoom method when creating coordSys next time
+          // // olMap.removeEventListener('moveend', this._oldMoveHandler)
+          // olMap.off('zoomend', this._oldZoomEndHandler)
+          // olMap.on('move', moveHandler)
+          // // olMap.addEventListener('moveend', moveHandler)
+          // olMap.on('zoomend', zoomEndHandler)
+          olMap.getView().on('change:resolution', moveHandler);
+          olMap.getView().on('change:center', moveHandler);
+          olMap.on('moveend', moveHandler);
+
+          this._oldMoveHandler = moveHandler;
+          this._oldZoomEndHandler = zoomEndHandler;
+
+          var roam = olMapModel.get('roam');
+          if (roam && roam !== 'scale') {
+            // todo 允许拖拽
+          } else {
+              // todo 不允许拖拽
+            }
+          if (roam && roam !== 'move') {
+            // todo 允许移动
+          } else {
+              // todo 不允许允许移动
+            }
+          rendering = false;
+        }
+      });
+    }
+
+    /**
+     * 移除图表DOM
+     */
+
+  }, {
+    key: 'remove',
+    value: function remove() {
+      this._echartsContainer.parentNode.removeChild(this._echartsContainer);
+      this._map = undefined;
+    }
+
+    /**
+     * 更新视图尺寸
+     */
+
+  }, {
+    key: 'resize',
+    value: function resize() {
+      var that = this;
+      setTimeout(function () {
+        that._echartsContainer.style.width = that._map.getSize() + 'px';
+        that._echartsContainer.style.height = that._map.getSize() + 'px';
+        that.chart.resize();
+      }, 100);
+    }
+
+    /**
+     * 添加监听事件
+     */
+
+  }, {
+    key: 'addResizeListener',
+    value: function addResizeListener() {
+      var _this = this;
+
+      window.addEventListener('orientationchange' in window ? 'orientationchange' : 'resize', function (event) {
+        _this.resize();
+      }, false);
+
+      window.addEventListener('pageshow', function (ev) {
+        if (ev.persisted) {
+          _this.resize();
+        }
+      }, false);
+    }
+  }]);
+
+  return Ol3Echarts;
+}();
+
+exports.default = Ol3Echarts;
+module.exports = exports['default'];
 
 /***/ }),
 /* 40 */
@@ -4002,7 +4302,7 @@ module.exports = {
 	"name": "HMap",
 	"version": "1.1.0",
 	"private": false,
-	"description": "HDSXTECH WEBGIS API",
+	"description": "WEBGIS API",
 	"keywords": [
 		"webgis",
 		"canvas",
@@ -4012,9 +4312,9 @@ module.exports = {
 	"author": "FDD <smileFDD@gmail.com>",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/smilefdd/"
+		"url": "https://github.com/sakitam-fdd/HMap.git"
 	},
-	"main": "dist/map.js",
+	"main": "dist/HMap.js",
 	"scripts": {
 		"build": "webpack --env build",
 		"dev": "webpack --progress --colors --watch --env dev",
@@ -4033,24 +4333,26 @@ module.exports = {
 		"babel-eslint": "^7.0.0",
 		"babel-loader": "^6.0.0",
 		"babel-plugin-add-module-exports": "0.1.2",
-		"babel-preset-es2015": "^6.0.0",
 		"babel-plugin-transform-runtime": "^6.0.0",
+		"babel-preset-es2015": "^6.0.0",
 		"babel-preset-stage-2": "^6.0.0",
 		"babel-register": "^6.0.0",
-		"eslint": "^3.7.1",
-		"eslint-loader": "^1.5.0",
-		"eslint-friendly-formatter": "^2.0.5",
-		"eslint-config-standard": "^6.1.0",
-		"eslint-plugin-promise": "^3.4.0",
-		"eslint-plugin-standard": "^2.0.1",
-		"yargs": "^6.0.0",
 		"chai": "^3.0.0",
 		"chalk": "^1.1.3",
+		"css-loader": "^0.28.0",
+		"eslint": "^3.7.1",
+		"eslint-config-standard": "^6.1.0",
+		"eslint-friendly-formatter": "^2.0.5",
+		"eslint-loader": "^1.5.0",
+		"eslint-plugin-promise": "^3.4.0",
+		"eslint-plugin-standard": "^2.0.1",
 		"mocha": "^2.0.0",
+		"style-loader": "^0.16.1",
 		"webpack": "^2.2.0",
 		"webpack-dev-middleware": "^1.8.3",
 		"webpack-hot-middleware": "^2.12.2",
-		"webpack-merge": "^0.14.1"
+		"webpack-merge": "^0.14.1",
+		"yargs": "^6.0.0"
 	},
 	"license": "MIT"
 };
@@ -13118,11 +13420,15 @@ var _Measure = __webpack_require__(38);
 
 var _Measure2 = _interopRequireDefault(_Measure);
 
+var _MeasureTool = __webpack_require__(112);
+
+var _MeasureTool2 = _interopRequireDefault(_MeasureTool);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HMap = {};
-HMap.version = __webpack_require__(42).version;
 __webpack_require__(41);
+HMap.version = __webpack_require__(42).version;
 
 
 HMap.ol = _constants.ol;
@@ -13135,6 +13441,7 @@ HMap.Ol3Echarts = _Ol3Echarts2.default;
 HMap.LayerSwitcher = _LayerSwitcher2.default;
 HMap.CustomCircle = _CustomCircle2.default;
 HMap.Measure = _Measure2.default;
+HMap.MeasureTool = _MeasureTool2.default;
 
 /**
  * Inherit the prototype methods from one constructor into another.
@@ -13171,6 +13478,579 @@ HMap.inherits = function (childCtor, parentCtor) {
 HMap.nullFunction = function () {};
 
 exports.default = HMap;
+module.exports = exports['default'];
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _mixin = __webpack_require__(16);
+
+var _mixin2 = _interopRequireDefault(_mixin);
+
+var _Layer = __webpack_require__(14);
+
+var _Layer2 = _interopRequireDefault(_Layer);
+
+var _constants = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MeasureTool = function (_mix) {
+  _inherits(MeasureTool, _mix);
+
+  function MeasureTool(map) {
+    _classCallCheck(this, MeasureTool);
+
+    var _this = _possibleConstructorReturn(this, (MeasureTool.__proto__ || Object.getPrototypeOf(MeasureTool)).call(this));
+
+    if (map && map instanceof _constants.ol.Map) {
+      /**
+       * 地图对象
+       * @type {ol.Map}
+       */
+      _this.map = map;
+      /**
+       * 计算工具
+       * @type {ol.Sphere}
+       */
+      _this.wgs84Sphere = new _constants.ol.Sphere(6378137);
+      /**
+       * 测量类型（目前预制两种，测距和测面）
+       * @type {{measureLength: string, measureArea: string}}
+       */
+      _this.measureTypes = {
+        measureLength: 'measureLength',
+        measureArea: 'measureArea'
+      };
+      /**
+       * 拖拽交互
+       * @type {null}
+       */
+      _this.dragPanInteraction = null;
+    } else {
+      throw new Error('传入的不是地图对象或者地图对象为空！');
+    }
+    return _this;
+  }
+
+  /**
+   * 初始设置
+   * @param params
+   */
+
+
+  _createClass(MeasureTool, [{
+    key: 'setUp',
+    value: function setUp(params) {
+      var _this2 = this;
+
+      /**
+       * 当前设置
+       * @type {*}
+       */
+      this.options = params || {};
+      /**
+       * 测量工具所处图层
+       * @type {*}
+       */
+      this.layerName = this.options['layerName'] || 'measureTool';
+      /**
+       * 点击计数器
+       * @type {number}
+       */
+      this.clickCount = 0;
+      /**
+       * 测量结果
+       * @type {null}
+       */
+      this.drawSketch = null;
+      /**
+       * draw对象
+       * @type {null}
+       */
+      this.draw = null;
+
+      /**
+       * 移动事件处理
+       * @type {null}
+       */
+      this.beforeMeasurePointerMoveHandler = null;
+      /**
+       * 处理机
+       * @type {null}
+       */
+      this.listener = null;
+      /**
+       * 当前所画要素
+       * @type {null}
+       */
+      this.drawSketch = null;
+      /**
+       * 测量提示信息
+       * @type {string}
+       */
+      this.measureHelpTooltip = '';
+
+      /**
+       * 面积测量提示
+       * @type {null}
+       */
+      this.measureAreaTooltip = null;
+
+      this.measureAreaTooltipElement = null;
+
+      if (this.options['measureType'] === this.measureTypes.measureLength) {
+        this.measureLengthClick = this.map.on('singleclick', function (event) {
+          _this2.clickCount += 1;
+          if (_this2.clickCount == 1) {
+            _this2.drawSketch.length = '起点';
+          }
+          _this2.addMeasureOverLay(event.coordinate, _this2.drawSketch.length);
+          _this2.addMeasurecircle(event.coordinate);
+        });
+        this.beforeMeasurePointerMoveHandler = this.map.on('pointermove', this.beforeDrawPointMoveHandler, this);
+      } else if (this.options['measureType'] == this.measureTypes.measureArea) {
+        this.measureAreaClick = this.map.on('singleclick', function (event) {});
+      }
+      this.addDrawInteraction();
+    }
+
+    /**
+     * 添加画笔交互
+     */
+
+  }, {
+    key: 'addDrawInteraction',
+    value: function addDrawInteraction() {
+      this.removeDrawInteraion();
+      var type = '';
+      if (this.options['measureType'] === this.measureTypes.measureLength) {
+        type = 'LineString';
+      } else if (this.options['measureType'] === this.measureTypes.measureArea) {
+        type = 'Polygon';
+      }
+      this.options['create'] = true;
+      this.layer = this.creatVectorLayer(this.layerName, this.options);
+      this.layer.setStyle(new _constants.ol.style.Style({
+        fill: new _constants.ol.style.Fill({
+          color: 'rgba(67, 110, 238, 0.4)'
+        }),
+        stroke: new _constants.ol.style.Stroke({
+          color: 'rgba(242,123,57,1)',
+          width: 2
+        }),
+        image: new _constants.ol.style.Circle({
+          radius: 4,
+          stroke: new _constants.ol.style.Stroke({
+            color: 'rgba(255,0,0,1)',
+            width: 1
+          }),
+          fill: new _constants.ol.style.Fill({
+            color: 'rgba(255,255,255,1)'
+          })
+        })
+      }));
+      this.draw = new _constants.ol.interaction.Draw({
+        source: this.layer.getSource(),
+        type: type,
+        style: new _constants.ol.style.Style({
+          fill: new _constants.ol.style.Fill({
+            color: 'rgba(254, 164, 164, 1)'
+          }),
+          stroke: new _constants.ol.style.Stroke({
+            color: 'rgba(252, 129, 129, 1)',
+            width: 3
+          }),
+          image: new _constants.ol.style.Circle({
+            radius: 1,
+            fill: new _constants.ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+      this.map.addInteraction(this.draw);
+      this.drawListener();
+      this.getDragPanInteraction().setActive(false);
+    }
+    /**
+     * 移除交互工具
+     */
+
+  }, {
+    key: 'removeDrawInteraion',
+    value: function removeDrawInteraion() {
+      if (this.draw) {
+        this.map.removeInteraction(this.draw);
+      }
+      this.draw = null;
+    }
+
+    /**
+     * 点击之前的提示信息
+     * @param event
+     */
+
+  }, {
+    key: 'beforeDrawPointMoveHandler',
+    value: function beforeDrawPointMoveHandler(event) {
+      if (!this.measureHelpTooltip) {
+        var helpTooltipElement = document.createElement('label');
+        helpTooltipElement.className = "BMapLabel";
+        helpTooltipElement.style.position = "absolute";
+        helpTooltipElement.style.display = "inline";
+        helpTooltipElement.style.cursor = "inherit";
+        helpTooltipElement.style.border = "none";
+        helpTooltipElement.style.padding = "0";
+        helpTooltipElement.style.whiteSpace = "nowrap";
+        helpTooltipElement.style.fontVariant = "normal";
+        helpTooltipElement.style.fontWeight = "normal";
+        helpTooltipElement.style.fontStretch = "normal";
+        helpTooltipElement.style.fontSize = "12px";
+        helpTooltipElement.style.lineHeight = "normal";
+        helpTooltipElement.style.fontFamily = "arial,simsun";
+        helpTooltipElement.style.color = "rgb(51, 51, 51)";
+        helpTooltipElement.style.webkitUserSelect = "none";
+        helpTooltipElement.innerHTML = "<span class='BMap_diso'><span class='BMap_disi'>单击确定起点</span></span>";
+        this.measureHelpTooltip = new _constants.ol.Overlay({
+          element: helpTooltipElement,
+          offset: [55, 20],
+          positioning: 'center-center'
+        });
+        this.map.addOverlay(this.measureHelpTooltip);
+      }
+      this.measureHelpTooltip.setPosition(event.coordinate);
+    }
+
+    /**
+     * 点击之后的事件处理
+     * @param event
+     */
+
+  }, {
+    key: 'drawPointerMoveHandler',
+    value: function drawPointerMoveHandler(event) {
+      if (this.measureTypes.measureLength === this.options['measureType']) {
+        if (event.dragging) {
+          return;
+        }
+        var helpTooltipElement = this.measureHelpTooltip.getElement();
+        helpTooltipElement.className = " BMapLabel BMap_disLabel";
+        helpTooltipElement.style.position = "absolute";
+        helpTooltipElement.style.display = "inline";
+        helpTooltipElement.style.cursor = "inherit";
+        helpTooltipElement.style.border = "1px solid rgb(255, 1, 3)";
+        helpTooltipElement.style.padding = "3px 5px";
+        helpTooltipElement.style.whiteSpace = "nowrap";
+        helpTooltipElement.style.fontVariant = "normal";
+        helpTooltipElement.style.fontWeight = "normal";
+        helpTooltipElement.style.fontStretch = "normal";
+        helpTooltipElement.style.fontSize = "12px";
+        helpTooltipElement.style.lineHeight = "normal";
+        helpTooltipElement.style.fontFamily = "arial,simsun";
+        helpTooltipElement.style.color = "rgb(51, 51, 51)";
+        helpTooltipElement.style.backgroundColor = "rgb(255, 255, 255)";
+        helpTooltipElement.style.webkitUserSelect = "none";
+        helpTooltipElement.innerHTML = "<span>总长:<span class='BMap_disBoxDis'></span></span><br><span style='color: #7a7a7a;'>单击确定地点,双击结束</span>";
+        this.measureHelpTooltip.setPosition(event.coordinate);
+      }
+    }
+
+    /**
+     * 画笔事件处理机
+     */
+
+  }, {
+    key: 'drawListener',
+    value: function drawListener() {
+      var _this3 = this;
+
+      this.draw.on('drawstart', function (event) {
+        _this3.drawSketch = event.feature;
+        _this3.drawSketch.set('uuid', Math.floor(Math.random() * 100000000 + 1));
+        if (_this3.measureTypes.measureLength === _this3.options['measureType']) {
+          _constants.ol.Observable.unByKey(_this3.beforeMeasurePointerMoveHandler);
+          _this3.listener = _this3.drawSketch.getGeometry().on('change', function (evt) {
+            var geom = evt.target;
+            if (geom instanceof _constants.ol.geom.LineString) {
+              var output = _this3.formatData(geom);
+              _this3.drawSketch.length = output;
+              _this3.measureHelpTooltip.getElement().firstElementChild.firstElementChild.innerHTML = output;
+            }
+          });
+          _this3.drawPointermove = _this3.map.on('pointermove', _this3.drawPointerMoveHandler, _this3);
+        } else if (_this3.measureTypes.measureArea === _this3.options['measureType']) {
+          var uuid = Math.floor(Math.random() * 100000000 + 1);
+          _this3.createMeasureAreaTooltip();
+          _this3.drawSketch.set('uuid', uuid);
+          _this3.measureAreaTooltip.set('uuid', uuid);
+          _this3.listener = _this3.drawSketch.getGeometry().on('change', function (evts) {
+            var geom = evts.target;
+            var area = _this3.formatData(geom);
+            if (_this3.measureAreaTooltip) {
+              _this3.measureAreaTooltipElement.innerHTML = '面积' + area;
+              _this3.measureAreaTooltip.setPosition(geom.getInteriorPoint().getCoordinates());
+            }
+          });
+        }
+      });
+      this.draw.on('drawend', function (ev) {
+        _this3.getDragPanInteraction().setActive(true);
+        _this3.map.getTargetElement().style.cursor = "default";
+        _this3.map.removeOverlay(_this3.measureHelpTooltip);
+        _this3.measureHelpTooltip = null;
+        if (_this3.measureTypes.measureLength === _this3.options['measureType']) {
+          _this3.addMeasureOverLay(ev.feature.getGeometry().getLastCoordinate(), _this3.drawSketch.length, '止点');
+          _this3.addMeasurecircle(ev.feature.getGeometry().getLastCoordinate());
+          _constants.ol.Observable.unByKey(_this3.listener);
+          _constants.ol.Observable.unByKey(_this3.drawPointermove);
+          _constants.ol.Observable.unByKey(_this3.measureLengthClick);
+        } else if (_this3.options['measureType'] === _this3.measureTypes.measureArea) {
+          _constants.ol.Observable.unByKey(_this3.listener);
+          _this3.addMeasureRemoveButton(ev.feature.getGeometry().getCoordinates()[0][0]);
+        }
+        _this3.listener = null;
+        _this3.drawSketch = null;
+        _this3.removeDrawInteraion();
+      });
+    }
+
+    /**
+     * 测量结果格式化
+     * @param geom
+     * @returns {*}
+     */
+
+  }, {
+    key: 'formatData',
+    value: function formatData(geom) {
+      var output = 0;
+      if (geom) {
+        if (this.options['measureType'] === this.measureTypes.measureLength) {
+          var coordinates = geom.getCoordinates(),
+              length = 0;
+          var sourceProj = this.map.getView().getProjection();
+          for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
+            var c1 = _constants.ol.proj.transform(coordinates[i], sourceProj, 'EPSG:4326');
+            var c2 = _constants.ol.proj.transform(coordinates[i + 1], sourceProj, 'EPSG:4326');
+            length += this.wgs84Sphere.haversineDistance(c1, c2);
+          }
+          if (length > 100) {
+            output = Math.round(length / 1000 * 100) / 100 + ' ' + '公里';
+          } else {
+            output = Math.round(length * 100) / 100 + ' ' + '米';
+          }
+        } else if (this.options['measureType'] === this.measureTypes.measureArea) {
+          var _sourceProj = this.getMap().getView().getProjection();
+          var geometry = /** @type {ol.geom.Polygon} */geom.clone().transform(_sourceProj, 'EPSG:4326');
+          var _coordinates = geometry.getLinearRing(0).getCoordinates();
+          var area = Math.abs(this.wgs84Sphere.geodesicArea(_coordinates));
+          if (area > 10000000000) {
+            output = Math.round(area / (1000 * 1000 * 10000) * 100) / 100 + ' ' + '万平方公里';
+          } else if (1000000 < area < 10000000000) {
+            output = Math.round(area / (1000 * 1000) * 100) / 100 + ' ' + '平方公里';
+          } else {
+            output = Math.round(area * 100) / 100 + ' ' + '平方米';
+          }
+        }
+      }
+      return output;
+    }
+
+    /**
+     * 添加点击测量时的圆圈
+     * @param coordinate
+     */
+
+  }, {
+    key: 'addMeasurecircle',
+    value: function addMeasurecircle(coordinate) {
+      var feature = new _constants.ol.Feature({
+        uuid: this.drawSketch.get('uuid'),
+        geometry: new _constants.ol.geom.Point(coordinate)
+      });
+      this.layer.getSource().addFeature(feature);
+    }
+
+    /**
+     * 添加测量结果Overlay
+     * @param coordinate
+     * @param length
+     * @param type
+     */
+
+  }, {
+    key: 'addMeasureOverLay',
+    value: function addMeasureOverLay(coordinate, length, type) {
+      var helpTooltipElement = document.createElement('label');
+      helpTooltipElement.style.position = "absolute";
+      helpTooltipElement.style.display = "inline";
+      helpTooltipElement.style.cursor = "inherit";
+      helpTooltipElement.style.border = "none";
+      helpTooltipElement.style.padding = "0";
+      helpTooltipElement.style.whiteSpace = "nowrap";
+      helpTooltipElement.style.fontVariant = "normal";
+      helpTooltipElement.style.fontWeight = "normal";
+      helpTooltipElement.style.fontStretch = "normal";
+      helpTooltipElement.style.fontSize = "12px";
+      helpTooltipElement.style.lineHeight = "normal";
+      helpTooltipElement.style.fontFamily = "arial,simsun";
+      helpTooltipElement.style.color = "rgb(51, 51, 51)";
+      helpTooltipElement.style.webkitUserSelect = "none";
+      if (type === '止点') {
+        helpTooltipElement.style.border = "1px solid rgb(255, 1, 3)";
+        helpTooltipElement.style.padding = "3px 5px";
+        helpTooltipElement.className = " BMapLabel BMap_disLabel";
+        helpTooltipElement.innerHTML = "总长<span class='BMap_disBoxDis'>" + length + "</span>";
+        this.addMeasureRemoveButton(coordinate);
+      } else {
+        helpTooltipElement.className = "BMapLabel";
+        helpTooltipElement.innerHTML = "<span class='BMap_diso'><span class='BMap_disi'>" + length + "</span></span>";
+      }
+      var tempMeasureTooltip = new _constants.ol.Overlay({
+        element: helpTooltipElement,
+        offset: [10, -10],
+        positioning: 'center-center'
+      });
+      this.map.addOverlay(tempMeasureTooltip);
+      tempMeasureTooltip.setPosition(coordinate);
+      tempMeasureTooltip.set('uuid', this.drawSketch.get("uuid"));
+    }
+
+    /**
+     * 添加移除按钮
+     * @param coordinate
+     */
+
+  }, {
+    key: 'addMeasureRemoveButton',
+    value: function addMeasureRemoveButton(coordinate) {
+      var _this4 = this;
+
+      var pos = [coordinate[0] - 5 * this.map.getView().getResolution(), coordinate[1]];
+      var btnImg = document.createElement('img');
+      btnImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEYzMzc1RDY3RDU1MTFFNUFDNDJFNjQ4NUUwMzRDRDYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEYzMzc1RDc3RDU1MTFFNUFDNDJFNjQ4NUUwMzRDRDYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0RjMzNzVENDdENTUxMUU1QUM0MkU2NDg1RTAzNENENiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0RjMzNzVENTdENTUxMUU1QUM0MkU2NDg1RTAzNENENiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsDx84AAAAC3SURBVHjavJIxDoMwDEV/ok5wDCbu0DvAdUBIwMLFSs/AxDXY6tZ2SCGVUikd+ifn20+2k5hHVd0AXJGmGQw+UyWMxY8KQGpbUNcB23aYHIsnuSgIy8dlAQ2DgwWSmD0YE5ReAq5pQOMIrKsDRByjKGC/dsxz2L7XQgU8JB7n4qDoY6SYF4J+p72T7/zeOXqr03SMx8XnsTUX7UgElKVCyDK3s8Tsae6sv/8ceceZ6jr1k99fAgwAsZy0Sa2HgDcAAAAASUVORK5CYII=';
+      btnImg.style.cursor = 'pointer';
+      btnImg.title = '清除测量结果';
+      btnImg.groupId = this.drawSketch.get('uuid');
+      btnImg.pos = coordinate;
+      btnImg.onclick = function (evt) {
+        _this4.RemoveMeasure(btnImg.groupId, coordinate);
+      };
+      var closeBtn = new _constants.ol.Overlay({
+        element: btnImg,
+        offset: [-2, -6],
+        positioning: 'center-center'
+      });
+      this.map.addOverlay(closeBtn);
+      closeBtn.setPosition(pos);
+      closeBtn.set('uuid', this.drawSketch.get('uuid'));
+    }
+
+    /**
+     * 面积测量结果
+     */
+
+  }, {
+    key: 'createMeasureAreaTooltip',
+    value: function createMeasureAreaTooltip() {
+      this.measureAreaTooltipElement = document.createElement('div');
+      this.measureAreaTooltipElement.style.marginLeft = "-6.25em";
+      this.measureAreaTooltipElement.className = 'measureTooltip hidden';
+      this.measureAreaTooltip = new _constants.ol.Overlay({
+        element: this.measureAreaTooltipElement,
+        offset: [15, 0],
+        positioning: 'center-left'
+      });
+      this.map.addOverlay(this.measureAreaTooltip);
+    }
+
+    /**
+     * 移除测量结果
+     * @param groupId
+     * @param pos
+     * @constructor
+     */
+
+  }, {
+    key: 'RemoveMeasure',
+    value: function RemoveMeasure(groupId, pos) {
+      var overlays = this.getMap().getOverlays().getArray();
+      if (overlays && Array.isArray(overlays)) {
+        var length = overlays.length;
+        // TODO 注意地图移除Overlay时数组长度会变化
+        for (var j = 0, i = 0; j < length; j++) {
+          i++;
+          if (overlays[length - i] && overlays[length - i] instanceof _constants.ol.Overlay && overlays[length - i].get('uuid') === groupId) {
+            this.map.removeOverlay(overlays[length - i]);
+          }
+        }
+      }
+      if (this.layer && this.layer.getSource()) {
+        var source = this.layer.getSource();
+        var features = source.getFeatures();
+        features.forEach(function (feat) {
+          var lastCoord = feat.getGeometry().getLastCoordinate();
+          if (lastCoord[0] === pos[0] && lastCoord[1] === pos[1] || feat.get('uuid') === groupId) {
+            source.removeFeature(feat);
+          }
+        }, this);
+      }
+    }
+
+    /**
+     * 获取地图拖拽漫游交互
+     * @returns {ol.interaction.DragPan|*|null}
+     */
+
+  }, {
+    key: 'getDragPanInteraction',
+    value: function getDragPanInteraction() {
+      var _this5 = this;
+
+      if (!this.dragPanInteraction) {
+        var items = this.getMap().getInteractions().getArray();
+        items.forEach(function (item) {
+          if (item && item instanceof _constants.ol.interaction.DragPan) {
+            _this5.dragPanInteraction = item;
+          }
+        });
+      }
+      return this.dragPanInteraction;
+    }
+
+    /**
+     * 返回当前地图对象
+     * @returns {ol.Map}
+     */
+
+  }, {
+    key: 'getMap',
+    value: function getMap() {
+      return this.map;
+    }
+  }]);
+
+  return MeasureTool;
+}((0, _mixin2.default)(_Layer2.default));
+
+exports.default = MeasureTool;
 module.exports = exports['default'];
 
 /***/ })

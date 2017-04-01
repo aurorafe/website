@@ -1,5 +1,5 @@
 ---
-title: 初始化简单地图
+title: 简单地图
 type: api
 order: 1
 ---

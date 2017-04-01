@@ -5,7 +5,7 @@ order: 4
 ---
 
 ### 添加单点
-  ##### addPoint(point,options)
+  ### addPoint(point,options)
      
  - **参数：**
   
@@ -23,7 +23,6 @@ order: 4
  - **用法：**
 ```html
   <button onclick="addPoint()">添加点</button>
-  <div id="addPoint"></div>
 ```
 ```js
 var point = {
@@ -46,12 +45,12 @@ var point = {
 function addPoint () {
   Maps.addPoint(point, {
     layerName: 'test'
-  });
+  })
 }
 ```
 
 ### 添加多点
-  ##### addPoints(points,options)
+  ### addPoints(points,options)
      
  - **参数：**
   
@@ -59,6 +58,38 @@ function addPoint () {
      - `{Object} options` 相关参数
         
  - **用法：**
-
-
+```html
+  <button onclick="addPoints()">添加多点</button>
+```
+```js
+var points = [{
+  attributes: {
+     ID: '01',
+     QLDM: 'Y236360922L0050',
+     QLMC: '柏木桥',
+     LXBM: 'Y236360922',
+     LXMC: '赤兴至排江',
+     QLZXZH: '7.4650000000',
+     PYZH: '0.0000000000',
+     QLQC: '23.0000000000',
+     QMQK: '3.5000000000',
+     ASYNXFLDM: '1.0000000000',
+     XZQHBM: '360922'
+    },
+    geometry: 'POINT (115.92466595234826 27.428038204473552)',
+    geometryType: 'Point'
+}]
+function addPoints () {
+  Maps.addPoints(points, {
+    layerName: 'test'
+  })
+}
+```
+### 事件
+   
+ > 通过id移除点
+ #### `removePointById(id)`
+ 
+ > 通过layerName移除图层
+ #### `removeFeatureByLayerName(layerName)`
 

@@ -28,3 +28,18 @@ order: 3
     layerSwitcher.switchLayer(type)
   }
 ```
+
+### 事件
+ 
+  > 切换图层
+  ##### `switchLayer(layerName)`
+  
+  > 返回所有底图的图层名（`Array`）
+  ##### `getBaseLayerNames()`
+  
+  > 设置地图对象
+  ##### `setMap(map)`
+  
+  > 返回地图对象
+  ##### `getMap()`
+ 
