@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 111);
+/******/ 	return __webpack_require__(__webpack_require__.s = 112);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -148,15 +148,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.config = exports.proj4 = exports.ol = exports.ee = exports.a = exports.PI = exports.x_PI = undefined;
 
-var _proj = __webpack_require__(77);
+var _proj = __webpack_require__(78);
 
 var _proj2 = _interopRequireDefault(_proj);
 
-var _openlayers = __webpack_require__(54);
+var _openlayers = __webpack_require__(55);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _config2 = __webpack_require__(43);
+var _config2 = __webpack_require__(44);
 
 var _config3 = _interopRequireDefault(_config2);
 
@@ -227,92 +227,6 @@ var config = exports.config = _config3.default;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = function(x) {
-  return (1 - 0.25 * x * (1 + x / 16 * (3 + 1.25 * x)));
-};
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = function(x) {
-  return (0.375 * x * (1 + 0.25 * x * (1 + 0.46875 * x)));
-};
-
-/***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = function(x) {
-  return (0.05859375 * x * x * (1 + 0.75 * x));
-};
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = function(x) {
-  return (x * x * x * (35 / 3072));
-};
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = function(e0, e1, e2, e3, phi) {
-  return (e0 * phi - e1 * Math.sin(2 * phi) + e2 * Math.sin(4 * phi) - e3 * Math.sin(6 * phi));
-};
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
-
-
-/* harmony default export */ __webpack_exports__["a"] = function(eccent, ts) {
-  var eccnth = 0.5 * eccent;
-  var con, dphi;
-  var phi = __WEBPACK_IMPORTED_MODULE_0__constants_values__["b" /* HALF_PI */] - 2 * Math.atan(ts);
-  for (var i = 0; i <= 15; i++) {
-    con = eccent * Math.sin(phi);
-    dphi = __WEBPACK_IMPORTED_MODULE_0__constants_values__["b" /* HALF_PI */] - 2 * Math.atan(ts * (Math.pow(((1 - con) / (1 + con)), eccnth))) - phi;
-    phi += dphi;
-    if (Math.abs(dphi) <= 0.0000000001) {
-      return phi;
-    }
-  }
-  //console.log("phi2z has NoConvergence");
-  return -9999;
-};
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
-
-
-/* harmony default export */ __webpack_exports__["a"] = function(eccent, phi, sinphi) {
-  var con = eccent * sinphi;
-  var com = 0.5 * eccent;
-  con = Math.pow(((1 - con) / (1 + con)), com);
-  return (Math.tan(0.5 * (__WEBPACK_IMPORTED_MODULE_0__constants_values__["b" /* HALF_PI */] - phi)) / con);
-};
-
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -326,11 +240,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _constants = __webpack_require__(2);
 
-var _mixin = __webpack_require__(16);
+var _mixin = __webpack_require__(8);
 
 var _mixin2 = _interopRequireDefault(_mixin);
 
-var _Style = __webpack_require__(15);
+var _Style = __webpack_require__(16);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -545,7 +459,181 @@ exports.default = Layer;
 module.exports = exports['default'];
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var mix = function mix() {
+  for (var _len = arguments.length, mixins = Array(_len), _key = 0; _key < _len; _key++) {
+    mixins[_key] = arguments[_key];
+  }
+
+  var Mix = function Mix() {
+    _classCallCheck(this, Mix);
+  };
+  // 以编程方式给Mix类添加
+
+  // mixins的所有方法和访问器
+
+
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = mixins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var mixin = _step.value;
+
+      copyProperties(Mix, mixin);
+      copyProperties(Mix.prototype, mixin.prototype);
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return Mix;
+};
+
+var copyProperties = function copyProperties(target, source) {
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = Reflect.ownKeys(source)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var key = _step2.value;
+
+      if (key !== "constructor" && key !== "prototype" && key !== "name") {
+        var desc = Object.getOwnPropertyDescriptor(source, key);
+        Object.defineProperty(target, key, desc);
+      }
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2.return) {
+        _iterator2.return();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+};
+
+exports.default = mix;
+module.exports = exports['default'];
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = function(x) {
+  return (1 - 0.25 * x * (1 + x / 16 * (3 + 1.25 * x)));
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = function(x) {
+  return (0.375 * x * (1 + 0.25 * x * (1 + 0.46875 * x)));
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = function(x) {
+  return (0.05859375 * x * x * (1 + 0.75 * x));
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = function(x) {
+  return (x * x * x * (35 / 3072));
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = function(e0, e1, e2, e3, phi) {
+  return (e0 * phi - e1 * Math.sin(2 * phi) + e2 * Math.sin(4 * phi) - e3 * Math.sin(6 * phi));
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
+
+
+/* harmony default export */ __webpack_exports__["a"] = function(eccent, ts) {
+  var eccnth = 0.5 * eccent;
+  var con, dphi;
+  var phi = __WEBPACK_IMPORTED_MODULE_0__constants_values__["b" /* HALF_PI */] - 2 * Math.atan(ts);
+  for (var i = 0; i <= 15; i++) {
+    con = eccent * Math.sin(phi);
+    dphi = __WEBPACK_IMPORTED_MODULE_0__constants_values__["b" /* HALF_PI */] - 2 * Math.atan(ts * (Math.pow(((1 - con) / (1 + con)), eccnth))) - phi;
+    phi += dphi;
+    if (Math.abs(dphi) <= 0.0000000001) {
+      return phi;
+    }
+  }
+  //console.log("phi2z has NoConvergence");
+  return -9999;
+};
+
+
+/***/ }),
 /* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
+
+
+/* harmony default export */ __webpack_exports__["a"] = function(eccent, phi, sinphi) {
+  var con = eccent * sinphi;
+  var com = 0.5 * eccent;
+  con = Math.pow(((1 - con) / (1 + con)), com);
+  return (Math.tan(0.5 * (__WEBPACK_IMPORTED_MODULE_0__constants_values__["b" /* HALF_PI */] - phi)) / con);
+};
+
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -808,104 +896,16 @@ exports.default = Style;
 module.exports = exports['default'];
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var mix = function mix() {
-  for (var _len = arguments.length, mixins = Array(_len), _key = 0; _key < _len; _key++) {
-    mixins[_key] = arguments[_key];
-  }
-
-  var Mix = function Mix() {
-    _classCallCheck(this, Mix);
-  };
-  // 以编程方式给Mix类添加
-
-  // mixins的所有方法和访问器
-
-
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = mixins[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var mixin = _step.value;
-
-      copyProperties(Mix, mixin);
-      copyProperties(Mix.prototype, mixin.prototype);
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  return Mix;
-};
-
-var copyProperties = function copyProperties(target, source) {
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
-
-  try {
-    for (var _iterator2 = Reflect.ownKeys(source)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var key = _step2.value;
-
-      if (key !== "constructor" && key !== "prototype" && key !== "name") {
-        var desc = Object.getOwnPropertyDescriptor(source, key);
-        Object.defineProperty(target, key, desc);
-      }
-    }
-  } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return) {
-        _iterator2.return();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
-  }
-};
-
-exports.default = mix;
-module.exports = exports['default'];
-
-/***/ }),
 /* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parseCode__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__extend__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__projections__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__deriveConstants__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_Datum__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datum__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parseCode__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__extend__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__projections__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__deriveConstants__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_Datum__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__datum__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__match__ = __webpack_require__(22);
 
 
@@ -1077,15 +1077,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _constants = __webpack_require__(2);
 
-var _mixin = __webpack_require__(16);
+var _mixin = __webpack_require__(8);
 
 var _mixin2 = _interopRequireDefault(_mixin);
 
-var _Style = __webpack_require__(15);
+var _Style = __webpack_require__(16);
 
 var _Style2 = _interopRequireDefault(_Style);
 
-var _Layer = __webpack_require__(14);
+var _Layer = __webpack_require__(7);
 
 var _Layer2 = _interopRequireDefault(_Layer);
 
@@ -2480,7 +2480,7 @@ var MAX_ITER = 20;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__global__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__projString__ = __webpack_require__(31);
 
 
@@ -2545,8 +2545,8 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */])(
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_PrimeMeridian__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_units__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_PrimeMeridian__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_units__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__match__ = __webpack_require__(22);
 
 
@@ -2692,10 +2692,10 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__global__["a" /* default */])(
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_sinh__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_hypot__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_asinhy__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_gatg__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_clens__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_clens_cmplx__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_asinhy__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_gatg__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_clens__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_clens_cmplx__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_adjust_lon__ = __webpack_require__(1);
 /* unused harmony export init */
 /* unused harmony export forward */
@@ -2874,8 +2874,8 @@ var names = ["Extended_Transverse_Mercator", "Extended Transverse Mercator", "et
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__datum_transform__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__adjust_axis__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__datum_transform__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__adjust_axis__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Proj__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_toPoint__ = __webpack_require__(29);
 /* harmony export (immutable) */ __webpack_exports__["a"] = transform;
@@ -3001,29 +3001,29 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _mixin = __webpack_require__(16);
+var _mixin = __webpack_require__(8);
 
 var _mixin2 = _interopRequireDefault(_mixin);
 
 var _constants = __webpack_require__(2);
 
-var _baseLayer = __webpack_require__(47);
+var _baseLayer = __webpack_require__(48);
 
 var _baseLayer2 = _interopRequireDefault(_baseLayer);
 
-var _Controls = __webpack_require__(44);
+var _Controls = __webpack_require__(45);
 
 var _Controls2 = _interopRequireDefault(_Controls);
 
-var _Interactions = __webpack_require__(45);
+var _Interactions = __webpack_require__(46);
 
 var _Interactions2 = _interopRequireDefault(_Interactions);
 
-var _View = __webpack_require__(46);
+var _View = __webpack_require__(47);
 
 var _View2 = _interopRequireDefault(_View);
 
-var _Layer = __webpack_require__(14);
+var _Layer = __webpack_require__(7);
 
 var _Layer2 = _interopRequireDefault(_Layer);
 
@@ -3031,7 +3031,7 @@ var _feature = __webpack_require__(23);
 
 var _feature2 = _interopRequireDefault(_feature);
 
-var _Style = __webpack_require__(15);
+var _Style = __webpack_require__(16);
 
 var _Style2 = _interopRequireDefault(_Style);
 
@@ -3223,7 +3223,7 @@ var CustomCircle = function () {
     this.projection = this.map.getView().getProjection();
     this.minRadius = 500; //最小半径
     this.maxRadius = 5000000; //最大半径
-    this.defaultSrc = "../example/images/marker.png"; //默认中心点src样式
+    this.defaultSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKTWlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVN3WJP3Fj7f92UPVkLY8LGXbIEAIiOsCMgQWaIQkgBhhBASQMWFiApWFBURnEhVxILVCkidiOKgKLhnQYqIWotVXDjuH9yntX167+3t+9f7vOec5/zOec8PgBESJpHmomoAOVKFPDrYH49PSMTJvYACFUjgBCAQ5svCZwXFAADwA3l4fnSwP/wBr28AAgBw1S4kEsfh/4O6UCZXACCRAOAiEucLAZBSAMguVMgUAMgYALBTs2QKAJQAAGx5fEIiAKoNAOz0ST4FANipk9wXANiiHKkIAI0BAJkoRyQCQLsAYFWBUiwCwMIAoKxAIi4EwK4BgFm2MkcCgL0FAHaOWJAPQGAAgJlCLMwAIDgCAEMeE80DIEwDoDDSv+CpX3CFuEgBAMDLlc2XS9IzFLiV0Bp38vDg4iHiwmyxQmEXKRBmCeQinJebIxNI5wNMzgwAABr50cH+OD+Q5+bk4eZm52zv9MWi/mvwbyI+IfHf/ryMAgQAEE7P79pf5eXWA3DHAbB1v2upWwDaVgBo3/ldM9sJoFoK0Hr5i3k4/EAenqFQyDwdHAoLC+0lYqG9MOOLPv8z4W/gi372/EAe/tt68ABxmkCZrcCjg/1xYW52rlKO58sEQjFu9+cj/seFf/2OKdHiNLFcLBWK8ViJuFAiTcd5uVKRRCHJleIS6X8y8R+W/QmTdw0ArIZPwE62B7XLbMB+7gECiw5Y0nYAQH7zLYwaC5EAEGc0Mnn3AACTv/mPQCsBAM2XpOMAALzoGFyolBdMxggAAESggSqwQQcMwRSswA6cwR28wBcCYQZEQAwkwDwQQgbkgBwKoRiWQRlUwDrYBLWwAxqgEZrhELTBMTgN5+ASXIHrcBcGYBiewhi8hgkEQcgIE2EhOogRYo7YIs4IF5mOBCJhSDSSgKQg6YgUUSLFyHKkAqlCapFdSCPyLXIUOY1cQPqQ28ggMor8irxHMZSBslED1AJ1QLmoHxqKxqBz0XQ0D12AlqJr0Rq0Hj2AtqKn0UvodXQAfYqOY4DRMQ5mjNlhXIyHRWCJWBomxxZj5Vg1Vo81Yx1YN3YVG8CeYe8IJAKLgBPsCF6EEMJsgpCQR1hMWEOoJewjtBK6CFcJg4Qxwicik6hPtCV6EvnEeGI6sZBYRqwm7iEeIZ4lXicOE1+TSCQOyZLkTgohJZAySQtJa0jbSC2kU6Q+0hBpnEwm65Btyd7kCLKArCCXkbeQD5BPkvvJw+S3FDrFiOJMCaIkUqSUEko1ZT/lBKWfMkKZoKpRzame1AiqiDqfWkltoHZQL1OHqRM0dZolzZsWQ8ukLaPV0JppZ2n3aC/pdLoJ3YMeRZfQl9Jr6Afp5+mD9HcMDYYNg8dIYigZaxl7GacYtxkvmUymBdOXmchUMNcyG5lnmA+Yb1VYKvYqfBWRyhKVOpVWlX6V56pUVXNVP9V5qgtUq1UPq15WfaZGVbNQ46kJ1Bar1akdVbupNq7OUndSj1DPUV+jvl/9gvpjDbKGhUaghkijVGO3xhmNIRbGMmXxWELWclYD6yxrmE1iW7L57Ex2Bfsbdi97TFNDc6pmrGaRZp3mcc0BDsax4PA52ZxKziHODc57LQMtPy2x1mqtZq1+rTfaetq+2mLtcu0W7eva73VwnUCdLJ31Om0693UJuja6UbqFutt1z+o+02PreekJ9cr1Dund0Uf1bfSj9Rfq79bv0R83MDQINpAZbDE4Y/DMkGPoa5hpuNHwhOGoEctoupHEaKPRSaMnuCbuh2fjNXgXPmasbxxirDTeZdxrPGFiaTLbpMSkxeS+Kc2Ua5pmutG003TMzMgs3KzYrMnsjjnVnGueYb7ZvNv8jYWlRZzFSos2i8eW2pZ8ywWWTZb3rJhWPlZ5VvVW16xJ1lzrLOtt1ldsUBtXmwybOpvLtqitm63Edptt3xTiFI8p0in1U27aMez87ArsmuwG7Tn2YfYl9m32zx3MHBId1jt0O3xydHXMdmxwvOuk4TTDqcSpw+lXZxtnoXOd8zUXpkuQyxKXdpcXU22niqdun3rLleUa7rrStdP1o5u7m9yt2W3U3cw9xX2r+00umxvJXcM970H08PdY4nHM452nm6fC85DnL152Xlle+70eT7OcJp7WMG3I28Rb4L3Le2A6Pj1l+s7pAz7GPgKfep+Hvqa+It89viN+1n6Zfgf8nvs7+sv9j/i/4XnyFvFOBWABwQHlAb2BGoGzA2sDHwSZBKUHNQWNBbsGLww+FUIMCQ1ZH3KTb8AX8hv5YzPcZyya0RXKCJ0VWhv6MMwmTB7WEY6GzwjfEH5vpvlM6cy2CIjgR2yIuB9pGZkX+X0UKSoyqi7qUbRTdHF09yzWrORZ+2e9jvGPqYy5O9tqtnJ2Z6xqbFJsY+ybuIC4qriBeIf4RfGXEnQTJAntieTE2MQ9ieNzAudsmjOc5JpUlnRjruXcorkX5unOy553PFk1WZB8OIWYEpeyP+WDIEJQLxhP5aduTR0T8oSbhU9FvqKNolGxt7hKPJLmnVaV9jjdO31D+miGT0Z1xjMJT1IreZEZkrkj801WRNberM/ZcdktOZSclJyjUg1plrQr1zC3KLdPZisrkw3keeZtyhuTh8r35CP5c/PbFWyFTNGjtFKuUA4WTC+oK3hbGFt4uEi9SFrUM99m/ur5IwuCFny9kLBQuLCz2Lh4WfHgIr9FuxYji1MXdy4xXVK6ZHhp8NJ9y2jLspb9UOJYUlXyannc8o5Sg9KlpUMrglc0lamUycturvRauWMVYZVkVe9ql9VbVn8qF5VfrHCsqK74sEa45uJXTl/VfPV5bdra3kq3yu3rSOuk626s91m/r0q9akHV0IbwDa0b8Y3lG19tSt50oXpq9Y7NtM3KzQM1YTXtW8y2rNvyoTaj9nqdf13LVv2tq7e+2Sba1r/dd3vzDoMdFTve75TsvLUreFdrvUV99W7S7oLdjxpiG7q/5n7duEd3T8Wej3ulewf2Re/ranRvbNyvv7+yCW1SNo0eSDpw5ZuAb9qb7Zp3tXBaKg7CQeXBJ9+mfHvjUOihzsPcw83fmX+39QjrSHkr0jq/dawto22gPaG97+iMo50dXh1Hvrf/fu8x42N1xzWPV56gnSg98fnkgpPjp2Snnp1OPz3Umdx590z8mWtdUV29Z0PPnj8XdO5Mt1/3yfPe549d8Lxw9CL3Ytslt0utPa49R35w/eFIr1tv62X3y+1XPK509E3rO9Hv03/6asDVc9f41y5dn3m978bsG7duJt0cuCW69fh29u0XdwruTNxdeo94r/y+2v3qB/oP6n+0/rFlwG3g+GDAYM/DWQ/vDgmHnv6U/9OH4dJHzEfVI0YjjY+dHx8bDRq98mTOk+GnsqcTz8p+Vv9563Or59/94vtLz1j82PAL+YvPv655qfNy76uprzrHI8cfvM55PfGm/K3O233vuO+638e9H5ko/ED+UPPR+mPHp9BP9z7nfP78L/eE8/sl0p8zAAA6GWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMTQgNzkuMTUxNDgxLCAyMDEzLzAzLzEzLTEyOjA5OjE1ICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTUtMTEtMDNUMTE6MjU6MzcrMDg6MDA8L3htcDpDcmVhdGVEYXRlPgogICAgICAgICA8eG1wOk1ldGFkYXRhRGF0ZT4yMDE1LTExLTAzVDExOjI1OjM3KzA4OjAwPC94bXA6TWV0YWRhdGFEYXRlPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxNS0xMS0wM1QxMToyNTozNyswODowMDwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnhtcC5paWQ6NGIzODJiN2QtODBkNi00YmYzLTkwOTktOWYyMTZhOTAyNzUyPC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD54bXAuZGlkOmZiZDY2Yzk5LWM5ZjYtNDBkOS05NzY0LWJkYTA1YmI5NWFmZjwveG1wTU06RG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD54bXAuZGlkOmZiZDY2Yzk5LWM5ZjYtNDBkOS05NzY0LWJkYTA1YmI5NWFmZjwveG1wTU06T3JpZ2luYWxEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06SGlzdG9yeT4KICAgICAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPmNyZWF0ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0Omluc3RhbmNlSUQ+eG1wLmlpZDpmYmQ2NmM5OS1jOWY2LTQwZDktOTc2NC1iZGEwNWJiOTVhZmY8L3N0RXZ0Omluc3RhbmNlSUQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDp3aGVuPjIwMTUtMTEtMDNUMTE6MjU6MzcrMDg6MDA8L3N0RXZ0OndoZW4+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpzb2Z0d2FyZUFnZW50PkFkb2JlIFBob3Rvc2hvcCBDQyAoTWFjaW50b3NoKTwvc3RFdnQ6c29mdHdhcmVBZ2VudD4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6YWN0aW9uPnNhdmVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDppbnN0YW5jZUlEPnhtcC5paWQ6NGIzODJiN2QtODBkNi00YmYzLTkwOTktOWYyMTZhOTAyNzUyPC9zdEV2dDppbnN0YW5jZUlEPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6d2hlbj4yMDE1LTExLTAzVDExOjI1OjM3KzA4OjAwPC9zdEV2dDp3aGVuPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6c29mdHdhcmVBZ2VudD5BZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCk8L3N0RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpjaGFuZ2VkPi88L3N0RXZ0OmNoYW5nZWQ+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICA8L3JkZjpTZXE+CiAgICAgICAgIDwveG1wTU06SGlzdG9yeT4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgICAgPHBob3Rvc2hvcDpDb2xvck1vZGU+MzwvcGhvdG9zaG9wOkNvbG9yTW9kZT4KICAgICAgICAgPHBob3Rvc2hvcDpJQ0NQcm9maWxlPnNSR0IgSUVDNjE5NjYtMi4xPC9waG90b3Nob3A6SUNDUHJvZmlsZT4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+MjA8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MzA8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PjRRCfkAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAAXBJREFUeNqs1TFrFEEUB/DfDWIlBISx9QMErO9bbBpJoQloISZVIjZWWomFYB3sRItTPJjKTxCYKoWkUZvYBY8IQkgRiGczyHG3FzZ386+W9/b9eFPsbE9LRk3/Bu6jwR3cKq1f+IqE9zHl0+nZ3hTUwyO8xE2X5zee4W1MeTwDjpr+dbzDuqtlgM2Y8vl/sGw2wF2L5RPWY8rjUApbS2DK7Bb0Rk1/BT+xYrn8we2AjQqYYmwErKmXtYDViuBqQKwIxoCLiuBFwHFF8DjgoCJ4EPCxIjgI+IyjCtgRhqF81NsVwO2Y8nmAmPIXvFgCe16MmftwF68ROkJ/8TSm/Kb1gi3ovXIvhg7YZkz5w2RxZqi8sNNhu51prHXDiU33yu+gLXsx5cdtjcuOtYsfLfXveDJvaC4YUz7Dg5bWw9Jz1Q3FlPcxnCgNS81CYMmrOc+LZ9T0D0dN/7DLu9c6mgnjmuB+19N0Bb/VBk+6gv8GAHn5ZfPg+9pTAAAAAElFTkSuQmCC"; //默认中心点src样式
     this.centerPoint = this.addCenterPoint(options.centerPoint ? options.centerPoint.src ? options.centerPoint.src : this.defaultSrc : this.defaultSrc); //中心点
     this.distance = options.distance ? options.distance > this.minRadius && options.distance < this.maxRadius ? this.transformRadius(this.center, options.distance) : this.transformRadius(this.center, this.minRadius) : this.transformRadius(this.center, this.minRadius);
     this.unit = options.distance ? options.distance > this.minRadius && options.distance < this.maxRadius ? options.distance : this.minRadius : this.minRadius;
@@ -3401,6 +3401,11 @@ var CustomCircle = function () {
     key: 'dragEditor',
     value: function dragEditor() {
       var self = this;
+      document.onmouseup = function (evt) {
+        self.mouseIng = false;
+        self.options.successCallback(self._getWKT(), self._getCenter(), self._getRadius());
+        evt.onmousemove = null;
+      };
       this.editor.getElement().onmouseup = function (evt) {
         self.mouseIng = false;
         self.options.successCallback(self._getWKT(), self._getCenter(), self._getRadius());
@@ -3797,6 +3802,579 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _mixin = __webpack_require__(8);
+
+var _mixin2 = _interopRequireDefault(_mixin);
+
+var _Layer = __webpack_require__(7);
+
+var _Layer2 = _interopRequireDefault(_Layer);
+
+var _constants = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MeasureTool = function (_mix) {
+  _inherits(MeasureTool, _mix);
+
+  function MeasureTool(map) {
+    _classCallCheck(this, MeasureTool);
+
+    var _this = _possibleConstructorReturn(this, (MeasureTool.__proto__ || Object.getPrototypeOf(MeasureTool)).call(this));
+
+    if (map && map instanceof _constants.ol.Map) {
+      /**
+       * 地图对象
+       * @type {ol.Map}
+       */
+      _this.map = map;
+      /**
+       * 计算工具
+       * @type {ol.Sphere}
+       */
+      _this.wgs84Sphere = new _constants.ol.Sphere(6378137);
+      /**
+       * 测量类型（目前预制两种，测距和测面）
+       * @type {{measureLength: string, measureArea: string}}
+       */
+      _this.measureTypes = {
+        measureLength: 'measureLength',
+        measureArea: 'measureArea'
+      };
+      /**
+       * 拖拽交互
+       * @type {null}
+       */
+      _this.dragPanInteraction = null;
+    } else {
+      throw new Error('传入的不是地图对象或者地图对象为空！');
+    }
+    return _this;
+  }
+
+  /**
+   * 初始设置
+   * @param params
+   */
+
+
+  _createClass(MeasureTool, [{
+    key: 'setUp',
+    value: function setUp(params) {
+      var _this2 = this;
+
+      /**
+       * 当前设置
+       * @type {*}
+       */
+      this.options = params || {};
+      /**
+       * 测量工具所处图层
+       * @type {*}
+       */
+      this.layerName = this.options['layerName'] || 'measureTool';
+      /**
+       * 点击计数器
+       * @type {number}
+       */
+      this.clickCount = 0;
+      /**
+       * 测量结果
+       * @type {null}
+       */
+      this.drawSketch = null;
+      /**
+       * draw对象
+       * @type {null}
+       */
+      this.draw = null;
+
+      /**
+       * 移动事件处理
+       * @type {null}
+       */
+      this.beforeMeasurePointerMoveHandler = null;
+      /**
+       * 处理机
+       * @type {null}
+       */
+      this.listener = null;
+      /**
+       * 当前所画要素
+       * @type {null}
+       */
+      this.drawSketch = null;
+      /**
+       * 测量提示信息
+       * @type {string}
+       */
+      this.measureHelpTooltip = '';
+
+      /**
+       * 面积测量提示
+       * @type {null}
+       */
+      this.measureAreaTooltip = null;
+
+      this.measureAreaTooltipElement = null;
+
+      if (this.options['measureType'] === this.measureTypes.measureLength) {
+        this.measureLengthClick = this.map.on('singleclick', function (event) {
+          _this2.clickCount += 1;
+          if (_this2.clickCount == 1) {
+            _this2.drawSketch.length = '起点';
+          }
+          _this2.addMeasureOverLay(event.coordinate, _this2.drawSketch.length);
+          _this2.addMeasurecircle(event.coordinate);
+        });
+        this.beforeMeasurePointerMoveHandler = this.map.on('pointermove', this.beforeDrawPointMoveHandler, this);
+      } else if (this.options['measureType'] == this.measureTypes.measureArea) {
+        this.measureAreaClick = this.map.on('singleclick', function (event) {});
+      }
+      this.addDrawInteraction();
+    }
+
+    /**
+     * 添加画笔交互
+     */
+
+  }, {
+    key: 'addDrawInteraction',
+    value: function addDrawInteraction() {
+      this.removeDrawInteraion();
+      var type = '';
+      if (this.options['measureType'] === this.measureTypes.measureLength) {
+        type = 'LineString';
+      } else if (this.options['measureType'] === this.measureTypes.measureArea) {
+        type = 'Polygon';
+      }
+      this.options['create'] = true;
+      this.layer = this.creatVectorLayer(this.layerName, this.options);
+      this.layer.setStyle(new _constants.ol.style.Style({
+        fill: new _constants.ol.style.Fill({
+          color: 'rgba(67, 110, 238, 0.4)'
+        }),
+        stroke: new _constants.ol.style.Stroke({
+          color: 'rgba(242,123,57,1)',
+          width: 2
+        }),
+        image: new _constants.ol.style.Circle({
+          radius: 4,
+          stroke: new _constants.ol.style.Stroke({
+            color: 'rgba(255,0,0,1)',
+            width: 1
+          }),
+          fill: new _constants.ol.style.Fill({
+            color: 'rgba(255,255,255,1)'
+          })
+        })
+      }));
+      this.draw = new _constants.ol.interaction.Draw({
+        source: this.layer.getSource(),
+        type: type,
+        style: new _constants.ol.style.Style({
+          fill: new _constants.ol.style.Fill({
+            color: 'rgba(254, 164, 164, 1)'
+          }),
+          stroke: new _constants.ol.style.Stroke({
+            color: 'rgba(252, 129, 129, 1)',
+            width: 3
+          }),
+          image: new _constants.ol.style.Circle({
+            radius: 1,
+            fill: new _constants.ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+      this.map.addInteraction(this.draw);
+      this.drawListener();
+      this.getDragPanInteraction().setActive(false);
+    }
+    /**
+     * 移除交互工具
+     */
+
+  }, {
+    key: 'removeDrawInteraion',
+    value: function removeDrawInteraion() {
+      if (this.draw) {
+        this.map.removeInteraction(this.draw);
+      }
+      this.draw = null;
+    }
+
+    /**
+     * 点击之前的提示信息
+     * @param event
+     */
+
+  }, {
+    key: 'beforeDrawPointMoveHandler',
+    value: function beforeDrawPointMoveHandler(event) {
+      if (!this.measureHelpTooltip) {
+        var helpTooltipElement = document.createElement('label');
+        helpTooltipElement.className = "BMapLabel";
+        helpTooltipElement.style.position = "absolute";
+        helpTooltipElement.style.display = "inline";
+        helpTooltipElement.style.cursor = "inherit";
+        helpTooltipElement.style.border = "none";
+        helpTooltipElement.style.padding = "0";
+        helpTooltipElement.style.whiteSpace = "nowrap";
+        helpTooltipElement.style.fontVariant = "normal";
+        helpTooltipElement.style.fontWeight = "normal";
+        helpTooltipElement.style.fontStretch = "normal";
+        helpTooltipElement.style.fontSize = "12px";
+        helpTooltipElement.style.lineHeight = "normal";
+        helpTooltipElement.style.fontFamily = "arial,simsun";
+        helpTooltipElement.style.color = "rgb(51, 51, 51)";
+        helpTooltipElement.style.webkitUserSelect = "none";
+        helpTooltipElement.innerHTML = "<span class='BMap_diso'><span class='BMap_disi'>单击确定起点</span></span>";
+        this.measureHelpTooltip = new _constants.ol.Overlay({
+          element: helpTooltipElement,
+          offset: [55, 20],
+          positioning: 'center-center'
+        });
+        this.map.addOverlay(this.measureHelpTooltip);
+      }
+      this.measureHelpTooltip.setPosition(event.coordinate);
+    }
+
+    /**
+     * 点击之后的事件处理
+     * @param event
+     */
+
+  }, {
+    key: 'drawPointerMoveHandler',
+    value: function drawPointerMoveHandler(event) {
+      if (this.measureTypes.measureLength === this.options['measureType']) {
+        if (event.dragging) {
+          return;
+        }
+        var helpTooltipElement = this.measureHelpTooltip.getElement();
+        helpTooltipElement.className = " BMapLabel BMap_disLabel";
+        helpTooltipElement.style.position = "absolute";
+        helpTooltipElement.style.display = "inline";
+        helpTooltipElement.style.cursor = "inherit";
+        helpTooltipElement.style.border = "1px solid rgb(255, 1, 3)";
+        helpTooltipElement.style.padding = "3px 5px";
+        helpTooltipElement.style.whiteSpace = "nowrap";
+        helpTooltipElement.style.fontVariant = "normal";
+        helpTooltipElement.style.fontWeight = "normal";
+        helpTooltipElement.style.fontStretch = "normal";
+        helpTooltipElement.style.fontSize = "12px";
+        helpTooltipElement.style.lineHeight = "normal";
+        helpTooltipElement.style.fontFamily = "arial,simsun";
+        helpTooltipElement.style.color = "rgb(51, 51, 51)";
+        helpTooltipElement.style.backgroundColor = "rgb(255, 255, 255)";
+        helpTooltipElement.style.webkitUserSelect = "none";
+        helpTooltipElement.innerHTML = "<span>总长:<span class='BMap_disBoxDis'></span></span><br><span style='color: #7a7a7a;'>单击确定地点,双击结束</span>";
+        this.measureHelpTooltip.setPosition(event.coordinate);
+      }
+    }
+
+    /**
+     * 画笔事件处理机
+     */
+
+  }, {
+    key: 'drawListener',
+    value: function drawListener() {
+      var _this3 = this;
+
+      this.draw.on('drawstart', function (event) {
+        _this3.drawSketch = event.feature;
+        _this3.drawSketch.set('uuid', Math.floor(Math.random() * 100000000 + 1));
+        if (_this3.measureTypes.measureLength === _this3.options['measureType']) {
+          _constants.ol.Observable.unByKey(_this3.beforeMeasurePointerMoveHandler);
+          _this3.listener = _this3.drawSketch.getGeometry().on('change', function (evt) {
+            var geom = evt.target;
+            if (geom instanceof _constants.ol.geom.LineString) {
+              var output = _this3.formatData(geom);
+              _this3.drawSketch.length = output;
+              _this3.measureHelpTooltip.getElement().firstElementChild.firstElementChild.innerHTML = output;
+            }
+          });
+          _this3.drawPointermove = _this3.map.on('pointermove', _this3.drawPointerMoveHandler, _this3);
+        } else if (_this3.measureTypes.measureArea === _this3.options['measureType']) {
+          var uuid = Math.floor(Math.random() * 100000000 + 1);
+          _this3.createMeasureAreaTooltip();
+          _this3.drawSketch.set('uuid', uuid);
+          _this3.measureAreaTooltip.set('uuid', uuid);
+          _this3.listener = _this3.drawSketch.getGeometry().on('change', function (evts) {
+            var geom = evts.target;
+            var area = _this3.formatData(geom);
+            if (_this3.measureAreaTooltip) {
+              _this3.measureAreaTooltipElement.innerHTML = '面积' + area;
+              _this3.measureAreaTooltip.setPosition(geom.getInteriorPoint().getCoordinates());
+            }
+          });
+        }
+      });
+      this.draw.on('drawend', function (ev) {
+        _this3.getDragPanInteraction().setActive(true);
+        _this3.map.getTargetElement().style.cursor = "default";
+        _this3.map.removeOverlay(_this3.measureHelpTooltip);
+        _this3.measureHelpTooltip = null;
+        if (_this3.measureTypes.measureLength === _this3.options['measureType']) {
+          _this3.addMeasureOverLay(ev.feature.getGeometry().getLastCoordinate(), _this3.drawSketch.length, '止点');
+          _this3.addMeasurecircle(ev.feature.getGeometry().getLastCoordinate());
+          _constants.ol.Observable.unByKey(_this3.listener);
+          _constants.ol.Observable.unByKey(_this3.drawPointermove);
+          _constants.ol.Observable.unByKey(_this3.measureLengthClick);
+        } else if (_this3.options['measureType'] === _this3.measureTypes.measureArea) {
+          _constants.ol.Observable.unByKey(_this3.listener);
+          _this3.addMeasureRemoveButton(ev.feature.getGeometry().getCoordinates()[0][0]);
+        }
+        _this3.listener = null;
+        _this3.drawSketch = null;
+        _this3.removeDrawInteraion();
+      });
+    }
+
+    /**
+     * 测量结果格式化
+     * @param geom
+     * @returns {*}
+     */
+
+  }, {
+    key: 'formatData',
+    value: function formatData(geom) {
+      var output = 0;
+      if (geom) {
+        if (this.options['measureType'] === this.measureTypes.measureLength) {
+          var coordinates = geom.getCoordinates(),
+              length = 0;
+          var sourceProj = this.map.getView().getProjection();
+          for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
+            var c1 = _constants.ol.proj.transform(coordinates[i], sourceProj, 'EPSG:4326');
+            var c2 = _constants.ol.proj.transform(coordinates[i + 1], sourceProj, 'EPSG:4326');
+            length += this.wgs84Sphere.haversineDistance(c1, c2);
+          }
+          if (length > 100) {
+            output = Math.round(length / 1000 * 100) / 100 + ' ' + '公里';
+          } else {
+            output = Math.round(length * 100) / 100 + ' ' + '米';
+          }
+        } else if (this.options['measureType'] === this.measureTypes.measureArea) {
+          var _sourceProj = this.getMap().getView().getProjection();
+          var geometry = /** @type {ol.geom.Polygon} */geom.clone().transform(_sourceProj, 'EPSG:4326');
+          var _coordinates = geometry.getLinearRing(0).getCoordinates();
+          var area = Math.abs(this.wgs84Sphere.geodesicArea(_coordinates));
+          if (area > 10000000000) {
+            output = Math.round(area / (1000 * 1000 * 10000) * 100) / 100 + ' ' + '万平方公里';
+          } else if (1000000 < area < 10000000000) {
+            output = Math.round(area / (1000 * 1000) * 100) / 100 + ' ' + '平方公里';
+          } else {
+            output = Math.round(area * 100) / 100 + ' ' + '平方米';
+          }
+        }
+      }
+      return output;
+    }
+
+    /**
+     * 添加点击测量时的圆圈
+     * @param coordinate
+     */
+
+  }, {
+    key: 'addMeasurecircle',
+    value: function addMeasurecircle(coordinate) {
+      var feature = new _constants.ol.Feature({
+        uuid: this.drawSketch.get('uuid'),
+        geometry: new _constants.ol.geom.Point(coordinate)
+      });
+      this.layer.getSource().addFeature(feature);
+    }
+
+    /**
+     * 添加测量结果Overlay
+     * @param coordinate
+     * @param length
+     * @param type
+     */
+
+  }, {
+    key: 'addMeasureOverLay',
+    value: function addMeasureOverLay(coordinate, length, type) {
+      var helpTooltipElement = document.createElement('label');
+      helpTooltipElement.style.position = "absolute";
+      helpTooltipElement.style.display = "inline";
+      helpTooltipElement.style.cursor = "inherit";
+      helpTooltipElement.style.border = "none";
+      helpTooltipElement.style.padding = "0";
+      helpTooltipElement.style.whiteSpace = "nowrap";
+      helpTooltipElement.style.fontVariant = "normal";
+      helpTooltipElement.style.fontWeight = "normal";
+      helpTooltipElement.style.fontStretch = "normal";
+      helpTooltipElement.style.fontSize = "12px";
+      helpTooltipElement.style.lineHeight = "normal";
+      helpTooltipElement.style.fontFamily = "arial,simsun";
+      helpTooltipElement.style.color = "rgb(51, 51, 51)";
+      helpTooltipElement.style.webkitUserSelect = "none";
+      if (type === '止点') {
+        helpTooltipElement.style.border = "1px solid rgb(255, 1, 3)";
+        helpTooltipElement.style.padding = "3px 5px";
+        helpTooltipElement.className = " BMapLabel BMap_disLabel";
+        helpTooltipElement.innerHTML = "总长<span class='BMap_disBoxDis'>" + length + "</span>";
+        this.addMeasureRemoveButton(coordinate);
+      } else {
+        helpTooltipElement.className = "BMapLabel";
+        helpTooltipElement.innerHTML = "<span class='BMap_diso'><span class='BMap_disi'>" + length + "</span></span>";
+      }
+      var tempMeasureTooltip = new _constants.ol.Overlay({
+        element: helpTooltipElement,
+        offset: [10, -10],
+        positioning: 'center-center'
+      });
+      this.map.addOverlay(tempMeasureTooltip);
+      tempMeasureTooltip.setPosition(coordinate);
+      tempMeasureTooltip.set('uuid', this.drawSketch.get("uuid"));
+    }
+
+    /**
+     * 添加移除按钮
+     * @param coordinate
+     */
+
+  }, {
+    key: 'addMeasureRemoveButton',
+    value: function addMeasureRemoveButton(coordinate) {
+      var _this4 = this;
+
+      var pos = [coordinate[0] - 5 * this.map.getView().getResolution(), coordinate[1]];
+      var btnImg = document.createElement('img');
+      btnImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEYzMzc1RDY3RDU1MTFFNUFDNDJFNjQ4NUUwMzRDRDYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEYzMzc1RDc3RDU1MTFFNUFDNDJFNjQ4NUUwMzRDRDYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0RjMzNzVENDdENTUxMUU1QUM0MkU2NDg1RTAzNENENiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0RjMzNzVENTdENTUxMUU1QUM0MkU2NDg1RTAzNENENiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsDx84AAAAC3SURBVHjavJIxDoMwDEV/ok5wDCbu0DvAdUBIwMLFSs/AxDXY6tZ2SCGVUikd+ifn20+2k5hHVd0AXJGmGQw+UyWMxY8KQGpbUNcB23aYHIsnuSgIy8dlAQ2DgwWSmD0YE5ReAq5pQOMIrKsDRByjKGC/dsxz2L7XQgU8JB7n4qDoY6SYF4J+p72T7/zeOXqr03SMx8XnsTUX7UgElKVCyDK3s8Tsae6sv/8ceceZ6jr1k99fAgwAsZy0Sa2HgDcAAAAASUVORK5CYII=';
+      btnImg.style.cursor = 'pointer';
+      btnImg.title = '清除测量结果';
+      btnImg.groupId = this.drawSketch.get('uuid');
+      btnImg.pos = coordinate;
+      btnImg.onclick = function (evt) {
+        _this4.RemoveMeasure(btnImg.groupId, coordinate);
+      };
+      var closeBtn = new _constants.ol.Overlay({
+        element: btnImg,
+        offset: [-2, -6],
+        positioning: 'center-center'
+      });
+      this.map.addOverlay(closeBtn);
+      closeBtn.setPosition(pos);
+      closeBtn.set('uuid', this.drawSketch.get('uuid'));
+    }
+
+    /**
+     * 面积测量结果
+     */
+
+  }, {
+    key: 'createMeasureAreaTooltip',
+    value: function createMeasureAreaTooltip() {
+      this.measureAreaTooltipElement = document.createElement('div');
+      this.measureAreaTooltipElement.style.marginLeft = "-6.25em";
+      this.measureAreaTooltipElement.className = 'measureTooltip hidden';
+      this.measureAreaTooltip = new _constants.ol.Overlay({
+        element: this.measureAreaTooltipElement,
+        offset: [15, 0],
+        positioning: 'center-left'
+      });
+      this.map.addOverlay(this.measureAreaTooltip);
+    }
+
+    /**
+     * 移除测量结果
+     * @param groupId
+     * @param pos
+     * @constructor
+     */
+
+  }, {
+    key: 'RemoveMeasure',
+    value: function RemoveMeasure(groupId, pos) {
+      var overlays = this.getMap().getOverlays().getArray();
+      if (overlays && Array.isArray(overlays)) {
+        var length = overlays.length;
+        // TODO 注意地图移除Overlay时数组长度会变化
+        for (var j = 0, i = 0; j < length; j++) {
+          i++;
+          if (overlays[length - i] && overlays[length - i] instanceof _constants.ol.Overlay && overlays[length - i].get('uuid') === groupId) {
+            this.map.removeOverlay(overlays[length - i]);
+          }
+        }
+      }
+      if (this.layer && this.layer.getSource()) {
+        var source = this.layer.getSource();
+        var features = source.getFeatures();
+        features.forEach(function (feat) {
+          var lastCoord = feat.getGeometry().getLastCoordinate();
+          if (lastCoord[0] === pos[0] && lastCoord[1] === pos[1] || feat.get('uuid') === groupId) {
+            source.removeFeature(feat);
+          }
+        }, this);
+      }
+    }
+
+    /**
+     * 获取地图拖拽漫游交互
+     * @returns {ol.interaction.DragPan|*|null}
+     */
+
+  }, {
+    key: 'getDragPanInteraction',
+    value: function getDragPanInteraction() {
+      var _this5 = this;
+
+      if (!this.dragPanInteraction) {
+        var items = this.getMap().getInteractions().getArray();
+        items.forEach(function (item) {
+          if (item && item instanceof _constants.ol.interaction.DragPan) {
+            _this5.dragPanInteraction = item;
+          }
+        });
+      }
+      return this.dragPanInteraction;
+    }
+
+    /**
+     * 返回当前地图对象
+     * @returns {ol.Map}
+     */
+
+  }, {
+    key: 'getMap',
+    value: function getMap() {
+      return this.map;
+    }
+  }]);
+
+  return MeasureTool;
+}((0, _mixin2.default)(_Layer2.default));
+
+exports.default = MeasureTool;
+module.exports = exports['default'];
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _constants = __webpack_require__(2);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4097,7 +4675,7 @@ exports.default = Ol3Echarts;
 module.exports = exports['default'];
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4269,16 +4847,16 @@ exports.default = CoordsTransform;
 module.exports = exports['default'];
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(49);
+var content = __webpack_require__(50);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(109)(content, {});
+var update = __webpack_require__(110)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -4295,7 +4873,7 @@ if(false) {
 }
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -4358,7 +4936,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4422,7 +5000,7 @@ exports.default = config;
 module.exports = exports['default'];
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4469,7 +5047,7 @@ exports.default = Controls;
 module.exports = exports['default'];
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4516,7 +5094,7 @@ exports.default = Interactions;
 module.exports = exports['default'];
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4561,7 +5139,7 @@ exports.default = View;
 module.exports = exports['default'];
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4840,7 +5418,7 @@ exports.default = BaseLayers;
 module.exports = exports['default'];
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4961,10 +5539,10 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(50)(undefined);
+exports = module.exports = __webpack_require__(51)(undefined);
 // imports
 
 
@@ -4975,7 +5553,7 @@ exports.push([module.i, ".ol-control,.ol-scale-line{position:absolute;padding:2p
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -5054,10 +5632,10 @@ function toComment(sourceMap) {
   return '/*# ' + data + ' */';
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53).Buffer))
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -5147,7 +5725,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5161,9 +5739,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 
-var base64 = __webpack_require__(48)
-var ieee754 = __webpack_require__(51)
-var isArray = __webpack_require__(53)
+var base64 = __webpack_require__(49)
+var ieee754 = __webpack_require__(52)
+var isArray = __webpack_require__(54)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -6944,7 +7522,7 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -6955,7 +7533,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;var require;var require;var require;var require;var require;var require;// OpenLayers. See https://openlayers.org/
@@ -7969,7 +8547,7 @@ Ok.prototype.changed=Ok.prototype.s;Ok.prototype.dispatchEvent=Ok.prototype.b;Ok
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8011,7 +8589,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8070,7 +8648,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8092,12 +8670,12 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hypot__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log1py__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__log1py__ = __webpack_require__(65);
 
 
 
@@ -8110,7 +8688,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8132,12 +8710,12 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sinh__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cosh__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__cosh__ = __webpack_require__(62);
 
 
 
@@ -8173,7 +8751,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8184,7 +8762,7 @@ Point.prototype.toMGRS = function(accuracy) {
 };
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8206,7 +8784,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8246,7 +8824,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8259,7 +8837,7 @@ Point.prototype.toMGRS = function(accuracy) {
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8268,7 +8846,7 @@ Point.prototype.toMGRS = function(accuracy) {
 };
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8373,7 +8951,7 @@ exports.rnb72 = {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8641,7 +9219,7 @@ exports.sphere = {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8665,7 +9243,7 @@ exports.oslo = 10.722916666667; //"10d43'22.5\"E"
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8676,7 +9254,7 @@ exports.oslo = 10.722916666667; //"10d43'22.5\"E"
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8748,7 +9326,7 @@ function proj4(fromProj, toProj, coord) {
 /* harmony default export */ __webpack_exports__["a"] = proj4;
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8791,7 +9369,7 @@ function datum(datumCode, datum_params, a, b, es, ep2) {
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9046,12 +9624,12 @@ function geocentricFromWgs84(p, datum_type, datum_params) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__datumUtils__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__datumUtils__ = __webpack_require__(73);
 
 
 
@@ -9094,12 +9672,12 @@ function checkParams(type) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_Ellipsoid__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_Ellipsoid__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__match__ = __webpack_require__(22);
 /* harmony export (immutable) */ __webpack_exports__["b"] = eccentricity;
 /* harmony export (immutable) */ __webpack_exports__["a"] = sphere;
@@ -9154,7 +9732,7 @@ function sphere(a, b, rf, ellps, sphere) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9175,7 +9753,7 @@ function sphere(a, b, rf, ellps, sphere) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9193,20 +9771,20 @@ function sphere(a, b, rf, ellps, sphere) {
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Proj__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Point__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Point__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_toPoint__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__defs__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__transform__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mgrs__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__version__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__projs__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__version__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__projs__ = __webpack_require__(109);
 
 
 
@@ -9231,7 +9809,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__projs__["a" /* default */])(_
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9276,12 +9854,12 @@ function parse(code){
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__projections_merc__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__projections_longlat__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__projections_merc__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__projections_longlat__ = __webpack_require__(92);
 /* unused harmony export add */
 /* unused harmony export get */
 /* unused harmony export start */
@@ -9327,7 +9905,7 @@ function start() {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9473,17 +10051,17 @@ var names = ["Albers_Conic_Equal_Area", "Albers", "aea"];
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_adjust_lon__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_values__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_mlfn__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e0fn__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_e1fn__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_e2fn__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_e3fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_mlfn__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e0fn__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_e1fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_e2fn__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_e3fn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_gN__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_asinz__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__common_imlfn__ = __webpack_require__(19);
@@ -9701,15 +10279,15 @@ var names = ["Azimuthal_Equidistant", "aeqd"];
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_mlfn__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_e0fn__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_e1fn__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e2fn__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_e3fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_mlfn__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_e0fn__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_e1fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e2fn__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_e3fn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_gN__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_adjust_lon__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_adjust_lat__ = __webpack_require__(5);
@@ -9830,14 +10408,14 @@ var names = ["Cassini", "Cassini_Soldner", "cass"];
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_adjust_lon__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_qsfnz__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_msfnz__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_iqsfnz__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_iqsfnz__ = __webpack_require__(64);
 /* unused harmony export init */
 /* unused harmony export forward */
 /* unused harmony export inverse */
@@ -9915,7 +10493,7 @@ var names = ["cea"];
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9976,16 +10554,16 @@ var names = ["Equirectangular", "Equidistant_Cylindrical", "eqc"];
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_e0fn__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_e1fn__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_e2fn__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e3fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_e0fn__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_e1fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_e2fn__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e3fn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_msfnz__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_mlfn__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_mlfn__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_adjust_lon__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_adjust_lat__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_imlfn__ = __webpack_require__(19);
@@ -10114,11 +10692,11 @@ var names = ["Equidistant_Conic", "eqdc"];
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_srat__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_srat__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants_values__ = __webpack_require__(0);
 /* unused harmony export init */
 /* unused harmony export forward */
@@ -10179,7 +10757,7 @@ var names = ["gauss"];
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10297,7 +10875,7 @@ var names = ["gnom"];
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10415,7 +10993,7 @@ var names = ["Krovak", "krovak"];
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10731,15 +11309,15 @@ var names = ["Lambert Azimuthal Equal Area", "Lambert_Azimuthal_Equal_Area", "la
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_msfnz__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_tsfnz__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_tsfnz__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_sign__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_adjust_lon__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_phi2z__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_phi2z__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__constants_values__ = __webpack_require__(0);
 /* unused harmony export init */
 /* unused harmony export forward */
@@ -10887,7 +11465,7 @@ var names = ["Lambert Tangential Conformal Conic Projection", "Lambert_Conformal
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10914,14 +11492,14 @@ var names = ["longlat", "identity"];
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_msfnz__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_adjust_lon__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_tsfnz__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_phi2z__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_tsfnz__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_phi2z__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_values__ = __webpack_require__(0);
 /* unused harmony export init */
 /* unused harmony export forward */
@@ -11030,7 +11608,7 @@ var names = ["Mercator", "Popular Visualisation Pseudo Mercator", "Mercator_1SP"
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11094,7 +11672,7 @@ var names = ["Miller_Cylindrical", "mill"];
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11190,7 +11768,7 @@ var names = ["Mollweide", "moll"];
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11429,13 +12007,13 @@ var names = ["New_Zealand_Map_Grid", "nzmg"];
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_tsfnz__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_tsfnz__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_adjust_lon__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_phi2z__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_phi2z__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants_values__ = __webpack_require__(0);
 /* unused harmony export init */
 /* unused harmony export forward */
@@ -11615,7 +12193,7 @@ var names = ["Hotine_Oblique_Mercator", "Hotine Oblique Mercator", "Hotine_Obliq
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11720,17 +12298,17 @@ var names = ["ortho"];
 
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_e0fn__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_e1fn__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_e2fn__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e3fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_e0fn__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_e1fn__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_e2fn__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_e3fn__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_adjust_lon__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_adjust_lat__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_mlfn__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_mlfn__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__constants_values__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__common_gN__ = __webpack_require__(18);
 /* unused harmony export init */
@@ -11875,7 +12453,7 @@ var names = ["Polyconic", "poly"];
 
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12008,7 +12586,7 @@ var names = ["Sinusoidal", "sinu"];
 
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12105,15 +12683,15 @@ var names = ["somerc"];
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_values__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_sign__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_msfnz__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_tsfnz__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_phi2z__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_tsfnz__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_phi2z__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_adjust_lon__ = __webpack_require__(1);
 /* unused harmony export ssfn_ */
 /* unused harmony export init */
@@ -12297,11 +12875,11 @@ var names = ["stere", "Stereographic_South_Pole", "Polar Stereographic (variant 
 
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gauss__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gauss__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common_adjust_lon__ = __webpack_require__(1);
 /* unused harmony export init */
 /* unused harmony export forward */
@@ -12374,7 +12952,7 @@ var names = ["Stereographic_North_Pole", "Oblique_Stereographic", "Polar_Stereog
 
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12564,11 +13142,11 @@ var names = ["Transverse_Mercator", "Transverse Mercator", "tmerc"];
 
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_adjust_zone__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_adjust_zone__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__etmerc__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_values__ = __webpack_require__(0);
 /* unused harmony export dependsOn */
@@ -12605,7 +13183,7 @@ var names = ["Universal Transverse Mercator System", "utm"];
 
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12748,18 +13326,18 @@ var names = ["Van_der_Grinten_I", "VanDerGrinten", "vandg"];
 
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__package_json__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__package_json__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__package_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__package_json__);
 /* harmony reexport (binding) */ if(__webpack_require__.o(__WEBPACK_IMPORTED_MODULE_0__package_json__, "version")) __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__package_json__["version"]; });
 
 
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -12905,34 +13483,34 @@ module.exports = {
 };
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_projections_tmerc__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_projections_tmerc__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_projections_etmerc__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_projections_utm__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_projections_sterea__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_projections_stere__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib_projections_somerc__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lib_projections_omerc__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lib_projections_lcc__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lib_projections_krovak__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__lib_projections_cass__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__lib_projections_laea__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__lib_projections_aea__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__lib_projections_gnom__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__lib_projections_cea__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__lib_projections_eqc__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__lib_projections_poly__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__lib_projections_nzmg__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__lib_projections_mill__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__lib_projections_sinu__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__lib_projections_moll__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__lib_projections_eqdc__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__lib_projections_vandg__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__lib_projections_aeqd__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__lib_projections_ortho__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_projections_utm__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_projections_sterea__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_projections_stere__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib_projections_somerc__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__lib_projections_omerc__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__lib_projections_lcc__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lib_projections_krovak__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__lib_projections_cass__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__lib_projections_laea__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__lib_projections_aea__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__lib_projections_gnom__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__lib_projections_cea__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__lib_projections_eqc__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__lib_projections_poly__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__lib_projections_nzmg__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__lib_projections_mill__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__lib_projections_sinu__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__lib_projections_moll__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__lib_projections_eqdc__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__lib_projections_vandg__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__lib_projections_aeqd__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__lib_projections_ortho__ = __webpack_require__(98);
 
 
 
@@ -12985,7 +13563,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -13022,7 +13600,7 @@ var stylesInDom = {},
 	singletonElement = null,
 	singletonCounter = 0,
 	styleElementsInsertedAtTop = [],
-	fixUrls = __webpack_require__(110);
+	fixUrls = __webpack_require__(111);
 
 module.exports = function(list, options) {
 	if(typeof DEBUG !== "undefined" && DEBUG) {
@@ -13281,7 +13859,7 @@ function updateLink(linkElement, options, obj) {
 
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports) {
 
 
@@ -13376,7 +13954,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13392,7 +13970,7 @@ var _Map = __webpack_require__(35);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _Layer = __webpack_require__(14);
+var _Layer = __webpack_require__(7);
 
 var _Layer2 = _interopRequireDefault(_Layer);
 
@@ -13400,11 +13978,11 @@ var _feature = __webpack_require__(23);
 
 var _feature2 = _interopRequireDefault(_feature);
 
-var _CoordsTransform = __webpack_require__(40);
+var _CoordsTransform = __webpack_require__(41);
 
 var _CoordsTransform2 = _interopRequireDefault(_CoordsTransform);
 
-var _Ol3Echarts = __webpack_require__(39);
+var _Ol3Echarts = __webpack_require__(40);
 
 var _Ol3Echarts2 = _interopRequireDefault(_Ol3Echarts);
 
@@ -13420,15 +13998,15 @@ var _Measure = __webpack_require__(38);
 
 var _Measure2 = _interopRequireDefault(_Measure);
 
-var _MeasureTool = __webpack_require__(112);
+var _MeasureTool = __webpack_require__(39);
 
 var _MeasureTool2 = _interopRequireDefault(_MeasureTool);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HMap = {};
-__webpack_require__(41);
-HMap.version = __webpack_require__(42).version;
+__webpack_require__(42);
+HMap.version = __webpack_require__(43).version;
 
 
 HMap.ol = _constants.ol;
@@ -13478,579 +14056,6 @@ HMap.inherits = function (childCtor, parentCtor) {
 HMap.nullFunction = function () {};
 
 exports.default = HMap;
-module.exports = exports['default'];
-
-/***/ }),
-/* 112 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _mixin = __webpack_require__(16);
-
-var _mixin2 = _interopRequireDefault(_mixin);
-
-var _Layer = __webpack_require__(14);
-
-var _Layer2 = _interopRequireDefault(_Layer);
-
-var _constants = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MeasureTool = function (_mix) {
-  _inherits(MeasureTool, _mix);
-
-  function MeasureTool(map) {
-    _classCallCheck(this, MeasureTool);
-
-    var _this = _possibleConstructorReturn(this, (MeasureTool.__proto__ || Object.getPrototypeOf(MeasureTool)).call(this));
-
-    if (map && map instanceof _constants.ol.Map) {
-      /**
-       * 地图对象
-       * @type {ol.Map}
-       */
-      _this.map = map;
-      /**
-       * 计算工具
-       * @type {ol.Sphere}
-       */
-      _this.wgs84Sphere = new _constants.ol.Sphere(6378137);
-      /**
-       * 测量类型（目前预制两种，测距和测面）
-       * @type {{measureLength: string, measureArea: string}}
-       */
-      _this.measureTypes = {
-        measureLength: 'measureLength',
-        measureArea: 'measureArea'
-      };
-      /**
-       * 拖拽交互
-       * @type {null}
-       */
-      _this.dragPanInteraction = null;
-    } else {
-      throw new Error('传入的不是地图对象或者地图对象为空！');
-    }
-    return _this;
-  }
-
-  /**
-   * 初始设置
-   * @param params
-   */
-
-
-  _createClass(MeasureTool, [{
-    key: 'setUp',
-    value: function setUp(params) {
-      var _this2 = this;
-
-      /**
-       * 当前设置
-       * @type {*}
-       */
-      this.options = params || {};
-      /**
-       * 测量工具所处图层
-       * @type {*}
-       */
-      this.layerName = this.options['layerName'] || 'measureTool';
-      /**
-       * 点击计数器
-       * @type {number}
-       */
-      this.clickCount = 0;
-      /**
-       * 测量结果
-       * @type {null}
-       */
-      this.drawSketch = null;
-      /**
-       * draw对象
-       * @type {null}
-       */
-      this.draw = null;
-
-      /**
-       * 移动事件处理
-       * @type {null}
-       */
-      this.beforeMeasurePointerMoveHandler = null;
-      /**
-       * 处理机
-       * @type {null}
-       */
-      this.listener = null;
-      /**
-       * 当前所画要素
-       * @type {null}
-       */
-      this.drawSketch = null;
-      /**
-       * 测量提示信息
-       * @type {string}
-       */
-      this.measureHelpTooltip = '';
-
-      /**
-       * 面积测量提示
-       * @type {null}
-       */
-      this.measureAreaTooltip = null;
-
-      this.measureAreaTooltipElement = null;
-
-      if (this.options['measureType'] === this.measureTypes.measureLength) {
-        this.measureLengthClick = this.map.on('singleclick', function (event) {
-          _this2.clickCount += 1;
-          if (_this2.clickCount == 1) {
-            _this2.drawSketch.length = '起点';
-          }
-          _this2.addMeasureOverLay(event.coordinate, _this2.drawSketch.length);
-          _this2.addMeasurecircle(event.coordinate);
-        });
-        this.beforeMeasurePointerMoveHandler = this.map.on('pointermove', this.beforeDrawPointMoveHandler, this);
-      } else if (this.options['measureType'] == this.measureTypes.measureArea) {
-        this.measureAreaClick = this.map.on('singleclick', function (event) {});
-      }
-      this.addDrawInteraction();
-    }
-
-    /**
-     * 添加画笔交互
-     */
-
-  }, {
-    key: 'addDrawInteraction',
-    value: function addDrawInteraction() {
-      this.removeDrawInteraion();
-      var type = '';
-      if (this.options['measureType'] === this.measureTypes.measureLength) {
-        type = 'LineString';
-      } else if (this.options['measureType'] === this.measureTypes.measureArea) {
-        type = 'Polygon';
-      }
-      this.options['create'] = true;
-      this.layer = this.creatVectorLayer(this.layerName, this.options);
-      this.layer.setStyle(new _constants.ol.style.Style({
-        fill: new _constants.ol.style.Fill({
-          color: 'rgba(67, 110, 238, 0.4)'
-        }),
-        stroke: new _constants.ol.style.Stroke({
-          color: 'rgba(242,123,57,1)',
-          width: 2
-        }),
-        image: new _constants.ol.style.Circle({
-          radius: 4,
-          stroke: new _constants.ol.style.Stroke({
-            color: 'rgba(255,0,0,1)',
-            width: 1
-          }),
-          fill: new _constants.ol.style.Fill({
-            color: 'rgba(255,255,255,1)'
-          })
-        })
-      }));
-      this.draw = new _constants.ol.interaction.Draw({
-        source: this.layer.getSource(),
-        type: type,
-        style: new _constants.ol.style.Style({
-          fill: new _constants.ol.style.Fill({
-            color: 'rgba(254, 164, 164, 1)'
-          }),
-          stroke: new _constants.ol.style.Stroke({
-            color: 'rgba(252, 129, 129, 1)',
-            width: 3
-          }),
-          image: new _constants.ol.style.Circle({
-            radius: 1,
-            fill: new _constants.ol.style.Fill({
-              color: '#ffcc33'
-            })
-          })
-        })
-      });
-      this.map.addInteraction(this.draw);
-      this.drawListener();
-      this.getDragPanInteraction().setActive(false);
-    }
-    /**
-     * 移除交互工具
-     */
-
-  }, {
-    key: 'removeDrawInteraion',
-    value: function removeDrawInteraion() {
-      if (this.draw) {
-        this.map.removeInteraction(this.draw);
-      }
-      this.draw = null;
-    }
-
-    /**
-     * 点击之前的提示信息
-     * @param event
-     */
-
-  }, {
-    key: 'beforeDrawPointMoveHandler',
-    value: function beforeDrawPointMoveHandler(event) {
-      if (!this.measureHelpTooltip) {
-        var helpTooltipElement = document.createElement('label');
-        helpTooltipElement.className = "BMapLabel";
-        helpTooltipElement.style.position = "absolute";
-        helpTooltipElement.style.display = "inline";
-        helpTooltipElement.style.cursor = "inherit";
-        helpTooltipElement.style.border = "none";
-        helpTooltipElement.style.padding = "0";
-        helpTooltipElement.style.whiteSpace = "nowrap";
-        helpTooltipElement.style.fontVariant = "normal";
-        helpTooltipElement.style.fontWeight = "normal";
-        helpTooltipElement.style.fontStretch = "normal";
-        helpTooltipElement.style.fontSize = "12px";
-        helpTooltipElement.style.lineHeight = "normal";
-        helpTooltipElement.style.fontFamily = "arial,simsun";
-        helpTooltipElement.style.color = "rgb(51, 51, 51)";
-        helpTooltipElement.style.webkitUserSelect = "none";
-        helpTooltipElement.innerHTML = "<span class='BMap_diso'><span class='BMap_disi'>单击确定起点</span></span>";
-        this.measureHelpTooltip = new _constants.ol.Overlay({
-          element: helpTooltipElement,
-          offset: [55, 20],
-          positioning: 'center-center'
-        });
-        this.map.addOverlay(this.measureHelpTooltip);
-      }
-      this.measureHelpTooltip.setPosition(event.coordinate);
-    }
-
-    /**
-     * 点击之后的事件处理
-     * @param event
-     */
-
-  }, {
-    key: 'drawPointerMoveHandler',
-    value: function drawPointerMoveHandler(event) {
-      if (this.measureTypes.measureLength === this.options['measureType']) {
-        if (event.dragging) {
-          return;
-        }
-        var helpTooltipElement = this.measureHelpTooltip.getElement();
-        helpTooltipElement.className = " BMapLabel BMap_disLabel";
-        helpTooltipElement.style.position = "absolute";
-        helpTooltipElement.style.display = "inline";
-        helpTooltipElement.style.cursor = "inherit";
-        helpTooltipElement.style.border = "1px solid rgb(255, 1, 3)";
-        helpTooltipElement.style.padding = "3px 5px";
-        helpTooltipElement.style.whiteSpace = "nowrap";
-        helpTooltipElement.style.fontVariant = "normal";
-        helpTooltipElement.style.fontWeight = "normal";
-        helpTooltipElement.style.fontStretch = "normal";
-        helpTooltipElement.style.fontSize = "12px";
-        helpTooltipElement.style.lineHeight = "normal";
-        helpTooltipElement.style.fontFamily = "arial,simsun";
-        helpTooltipElement.style.color = "rgb(51, 51, 51)";
-        helpTooltipElement.style.backgroundColor = "rgb(255, 255, 255)";
-        helpTooltipElement.style.webkitUserSelect = "none";
-        helpTooltipElement.innerHTML = "<span>总长:<span class='BMap_disBoxDis'></span></span><br><span style='color: #7a7a7a;'>单击确定地点,双击结束</span>";
-        this.measureHelpTooltip.setPosition(event.coordinate);
-      }
-    }
-
-    /**
-     * 画笔事件处理机
-     */
-
-  }, {
-    key: 'drawListener',
-    value: function drawListener() {
-      var _this3 = this;
-
-      this.draw.on('drawstart', function (event) {
-        _this3.drawSketch = event.feature;
-        _this3.drawSketch.set('uuid', Math.floor(Math.random() * 100000000 + 1));
-        if (_this3.measureTypes.measureLength === _this3.options['measureType']) {
-          _constants.ol.Observable.unByKey(_this3.beforeMeasurePointerMoveHandler);
-          _this3.listener = _this3.drawSketch.getGeometry().on('change', function (evt) {
-            var geom = evt.target;
-            if (geom instanceof _constants.ol.geom.LineString) {
-              var output = _this3.formatData(geom);
-              _this3.drawSketch.length = output;
-              _this3.measureHelpTooltip.getElement().firstElementChild.firstElementChild.innerHTML = output;
-            }
-          });
-          _this3.drawPointermove = _this3.map.on('pointermove', _this3.drawPointerMoveHandler, _this3);
-        } else if (_this3.measureTypes.measureArea === _this3.options['measureType']) {
-          var uuid = Math.floor(Math.random() * 100000000 + 1);
-          _this3.createMeasureAreaTooltip();
-          _this3.drawSketch.set('uuid', uuid);
-          _this3.measureAreaTooltip.set('uuid', uuid);
-          _this3.listener = _this3.drawSketch.getGeometry().on('change', function (evts) {
-            var geom = evts.target;
-            var area = _this3.formatData(geom);
-            if (_this3.measureAreaTooltip) {
-              _this3.measureAreaTooltipElement.innerHTML = '面积' + area;
-              _this3.measureAreaTooltip.setPosition(geom.getInteriorPoint().getCoordinates());
-            }
-          });
-        }
-      });
-      this.draw.on('drawend', function (ev) {
-        _this3.getDragPanInteraction().setActive(true);
-        _this3.map.getTargetElement().style.cursor = "default";
-        _this3.map.removeOverlay(_this3.measureHelpTooltip);
-        _this3.measureHelpTooltip = null;
-        if (_this3.measureTypes.measureLength === _this3.options['measureType']) {
-          _this3.addMeasureOverLay(ev.feature.getGeometry().getLastCoordinate(), _this3.drawSketch.length, '止点');
-          _this3.addMeasurecircle(ev.feature.getGeometry().getLastCoordinate());
-          _constants.ol.Observable.unByKey(_this3.listener);
-          _constants.ol.Observable.unByKey(_this3.drawPointermove);
-          _constants.ol.Observable.unByKey(_this3.measureLengthClick);
-        } else if (_this3.options['measureType'] === _this3.measureTypes.measureArea) {
-          _constants.ol.Observable.unByKey(_this3.listener);
-          _this3.addMeasureRemoveButton(ev.feature.getGeometry().getCoordinates()[0][0]);
-        }
-        _this3.listener = null;
-        _this3.drawSketch = null;
-        _this3.removeDrawInteraion();
-      });
-    }
-
-    /**
-     * 测量结果格式化
-     * @param geom
-     * @returns {*}
-     */
-
-  }, {
-    key: 'formatData',
-    value: function formatData(geom) {
-      var output = 0;
-      if (geom) {
-        if (this.options['measureType'] === this.measureTypes.measureLength) {
-          var coordinates = geom.getCoordinates(),
-              length = 0;
-          var sourceProj = this.map.getView().getProjection();
-          for (var i = 0, ii = coordinates.length - 1; i < ii; ++i) {
-            var c1 = _constants.ol.proj.transform(coordinates[i], sourceProj, 'EPSG:4326');
-            var c2 = _constants.ol.proj.transform(coordinates[i + 1], sourceProj, 'EPSG:4326');
-            length += this.wgs84Sphere.haversineDistance(c1, c2);
-          }
-          if (length > 100) {
-            output = Math.round(length / 1000 * 100) / 100 + ' ' + '公里';
-          } else {
-            output = Math.round(length * 100) / 100 + ' ' + '米';
-          }
-        } else if (this.options['measureType'] === this.measureTypes.measureArea) {
-          var _sourceProj = this.getMap().getView().getProjection();
-          var geometry = /** @type {ol.geom.Polygon} */geom.clone().transform(_sourceProj, 'EPSG:4326');
-          var _coordinates = geometry.getLinearRing(0).getCoordinates();
-          var area = Math.abs(this.wgs84Sphere.geodesicArea(_coordinates));
-          if (area > 10000000000) {
-            output = Math.round(area / (1000 * 1000 * 10000) * 100) / 100 + ' ' + '万平方公里';
-          } else if (1000000 < area < 10000000000) {
-            output = Math.round(area / (1000 * 1000) * 100) / 100 + ' ' + '平方公里';
-          } else {
-            output = Math.round(area * 100) / 100 + ' ' + '平方米';
-          }
-        }
-      }
-      return output;
-    }
-
-    /**
-     * 添加点击测量时的圆圈
-     * @param coordinate
-     */
-
-  }, {
-    key: 'addMeasurecircle',
-    value: function addMeasurecircle(coordinate) {
-      var feature = new _constants.ol.Feature({
-        uuid: this.drawSketch.get('uuid'),
-        geometry: new _constants.ol.geom.Point(coordinate)
-      });
-      this.layer.getSource().addFeature(feature);
-    }
-
-    /**
-     * 添加测量结果Overlay
-     * @param coordinate
-     * @param length
-     * @param type
-     */
-
-  }, {
-    key: 'addMeasureOverLay',
-    value: function addMeasureOverLay(coordinate, length, type) {
-      var helpTooltipElement = document.createElement('label');
-      helpTooltipElement.style.position = "absolute";
-      helpTooltipElement.style.display = "inline";
-      helpTooltipElement.style.cursor = "inherit";
-      helpTooltipElement.style.border = "none";
-      helpTooltipElement.style.padding = "0";
-      helpTooltipElement.style.whiteSpace = "nowrap";
-      helpTooltipElement.style.fontVariant = "normal";
-      helpTooltipElement.style.fontWeight = "normal";
-      helpTooltipElement.style.fontStretch = "normal";
-      helpTooltipElement.style.fontSize = "12px";
-      helpTooltipElement.style.lineHeight = "normal";
-      helpTooltipElement.style.fontFamily = "arial,simsun";
-      helpTooltipElement.style.color = "rgb(51, 51, 51)";
-      helpTooltipElement.style.webkitUserSelect = "none";
-      if (type === '止点') {
-        helpTooltipElement.style.border = "1px solid rgb(255, 1, 3)";
-        helpTooltipElement.style.padding = "3px 5px";
-        helpTooltipElement.className = " BMapLabel BMap_disLabel";
-        helpTooltipElement.innerHTML = "总长<span class='BMap_disBoxDis'>" + length + "</span>";
-        this.addMeasureRemoveButton(coordinate);
-      } else {
-        helpTooltipElement.className = "BMapLabel";
-        helpTooltipElement.innerHTML = "<span class='BMap_diso'><span class='BMap_disi'>" + length + "</span></span>";
-      }
-      var tempMeasureTooltip = new _constants.ol.Overlay({
-        element: helpTooltipElement,
-        offset: [10, -10],
-        positioning: 'center-center'
-      });
-      this.map.addOverlay(tempMeasureTooltip);
-      tempMeasureTooltip.setPosition(coordinate);
-      tempMeasureTooltip.set('uuid', this.drawSketch.get("uuid"));
-    }
-
-    /**
-     * 添加移除按钮
-     * @param coordinate
-     */
-
-  }, {
-    key: 'addMeasureRemoveButton',
-    value: function addMeasureRemoveButton(coordinate) {
-      var _this4 = this;
-
-      var pos = [coordinate[0] - 5 * this.map.getView().getResolution(), coordinate[1]];
-      var btnImg = document.createElement('img');
-      btnImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEYzMzc1RDY3RDU1MTFFNUFDNDJFNjQ4NUUwMzRDRDYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEYzMzc1RDc3RDU1MTFFNUFDNDJFNjQ4NUUwMzRDRDYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0RjMzNzVENDdENTUxMUU1QUM0MkU2NDg1RTAzNENENiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0RjMzNzVENTdENTUxMUU1QUM0MkU2NDg1RTAzNENENiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsDx84AAAAC3SURBVHjavJIxDoMwDEV/ok5wDCbu0DvAdUBIwMLFSs/AxDXY6tZ2SCGVUikd+ifn20+2k5hHVd0AXJGmGQw+UyWMxY8KQGpbUNcB23aYHIsnuSgIy8dlAQ2DgwWSmD0YE5ReAq5pQOMIrKsDRByjKGC/dsxz2L7XQgU8JB7n4qDoY6SYF4J+p72T7/zeOXqr03SMx8XnsTUX7UgElKVCyDK3s8Tsae6sv/8ceceZ6jr1k99fAgwAsZy0Sa2HgDcAAAAASUVORK5CYII=';
-      btnImg.style.cursor = 'pointer';
-      btnImg.title = '清除测量结果';
-      btnImg.groupId = this.drawSketch.get('uuid');
-      btnImg.pos = coordinate;
-      btnImg.onclick = function (evt) {
-        _this4.RemoveMeasure(btnImg.groupId, coordinate);
-      };
-      var closeBtn = new _constants.ol.Overlay({
-        element: btnImg,
-        offset: [-2, -6],
-        positioning: 'center-center'
-      });
-      this.map.addOverlay(closeBtn);
-      closeBtn.setPosition(pos);
-      closeBtn.set('uuid', this.drawSketch.get('uuid'));
-    }
-
-    /**
-     * 面积测量结果
-     */
-
-  }, {
-    key: 'createMeasureAreaTooltip',
-    value: function createMeasureAreaTooltip() {
-      this.measureAreaTooltipElement = document.createElement('div');
-      this.measureAreaTooltipElement.style.marginLeft = "-6.25em";
-      this.measureAreaTooltipElement.className = 'measureTooltip hidden';
-      this.measureAreaTooltip = new _constants.ol.Overlay({
-        element: this.measureAreaTooltipElement,
-        offset: [15, 0],
-        positioning: 'center-left'
-      });
-      this.map.addOverlay(this.measureAreaTooltip);
-    }
-
-    /**
-     * 移除测量结果
-     * @param groupId
-     * @param pos
-     * @constructor
-     */
-
-  }, {
-    key: 'RemoveMeasure',
-    value: function RemoveMeasure(groupId, pos) {
-      var overlays = this.getMap().getOverlays().getArray();
-      if (overlays && Array.isArray(overlays)) {
-        var length = overlays.length;
-        // TODO 注意地图移除Overlay时数组长度会变化
-        for (var j = 0, i = 0; j < length; j++) {
-          i++;
-          if (overlays[length - i] && overlays[length - i] instanceof _constants.ol.Overlay && overlays[length - i].get('uuid') === groupId) {
-            this.map.removeOverlay(overlays[length - i]);
-          }
-        }
-      }
-      if (this.layer && this.layer.getSource()) {
-        var source = this.layer.getSource();
-        var features = source.getFeatures();
-        features.forEach(function (feat) {
-          var lastCoord = feat.getGeometry().getLastCoordinate();
-          if (lastCoord[0] === pos[0] && lastCoord[1] === pos[1] || feat.get('uuid') === groupId) {
-            source.removeFeature(feat);
-          }
-        }, this);
-      }
-    }
-
-    /**
-     * 获取地图拖拽漫游交互
-     * @returns {ol.interaction.DragPan|*|null}
-     */
-
-  }, {
-    key: 'getDragPanInteraction',
-    value: function getDragPanInteraction() {
-      var _this5 = this;
-
-      if (!this.dragPanInteraction) {
-        var items = this.getMap().getInteractions().getArray();
-        items.forEach(function (item) {
-          if (item && item instanceof _constants.ol.interaction.DragPan) {
-            _this5.dragPanInteraction = item;
-          }
-        });
-      }
-      return this.dragPanInteraction;
-    }
-
-    /**
-     * 返回当前地图对象
-     * @returns {ol.Map}
-     */
-
-  }, {
-    key: 'getMap',
-    value: function getMap() {
-      return this.map;
-    }
-  }]);
-
-  return MeasureTool;
-}((0, _mixin2.default)(_Layer2.default));
-
-exports.default = MeasureTool;
 module.exports = exports['default'];
 
 /***/ })
