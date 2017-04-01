@@ -35,4 +35,15 @@ order: 1
     Maps.initMap('map',options)
    ```
    
+
+### 事件
+> 获取当前地图
+   #### `getMap ()`
    
+> 设置地图实例
+   #### `setMap (map)`
+  - **参数：**
+     - `{ol.Map} map`
+     
+> 更新地图
+  #### `updateSize ()`
