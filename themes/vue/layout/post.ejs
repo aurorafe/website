@@ -11,6 +11,15 @@
          </h2>-->
     <ul style="padding:0">
       <% site.posts.sort('order', 1).limit().each(function (post) { %>
+      <% if (post.secTitle === 'basics') { %>
+        <li><h3>基础使用</h3></li>
+      <% } %>
+      <% if (post.secTitle === 'advanced') { %>
+      <li><h3>进阶</h3></li>
+      <% } %>
+      <% if (post.secTitle === 'description') { %>
+      <li><h3>说明</h3></li>
+      <% } %>
       <li>
         <% if (post.type === page.type) { %>
         <a href="/<%- post.path %>"

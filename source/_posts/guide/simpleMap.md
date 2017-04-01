@@ -1,6 +1,7 @@
 ---
 title: 简单地图
 type: guide
+secTitle : basics
 order: 3
 ---
 
