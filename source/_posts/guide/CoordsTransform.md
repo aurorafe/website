@@ -42,7 +42,7 @@ order: 100
 
 ### 示例用法（Example&Usage）
 
-```javascript
+```ecmascript 6
 import CoordsTransform from './CoordsTransform'
 
 let coordsT = new CoordsTransform();
