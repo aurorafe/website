@@ -27,7 +27,7 @@
     }
 
     function createSourceSearchPath(query) {
-      return 'https://github.com/search?utf8=%E2%9C%93&q=repo%3Avuejs%2Fvue+extension%3Ajs+' + encodeURIComponent(query) + '+&type=Code'
+      return '' + encodeURIComponent(query) + '+&type=Code'
     }
   }
 
@@ -107,10 +107,7 @@
       var section = window.location.pathname.match(/\/v\d\/(\w+?)\//)[1]
       if (version === 'SELF') return
       window.location.assign(
-        'http://' +
-        version +
-        (version && '-') +
-        'cn.vuejs.org/' + section + '/'
+        'http://hdsxtech.github.io'
       )
     })
   }
