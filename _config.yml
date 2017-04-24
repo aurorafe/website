@@ -94,4 +94,11 @@ feed:
   path: atom.xml
   limit: 20
 
+algolia:
+  applicationID: '9A3A4VR36K'
+  apiKey: '51ea911d21adb378084f12d4ffb79a3a'
+  adminApiKey: 'c014074c623e7d5814add2315ac9a3c0'
+  indexName: 'hmap-js'
+  chunkSize: 5000
+
 
